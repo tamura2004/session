@@ -1,0 +1,15 @@
+h1 キャラクターを選択してください
+
+table.table.table-bordered
+  thead
+    tr
+      th キャラクター名
+
+  tbody
+    - @pcs.each do |pc|
+      tr
+        td = link_to pc.name, pc_path(pc)
+
+br
+
+= link_to 'New Pc', new_pc_path

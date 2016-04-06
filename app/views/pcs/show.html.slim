@@ -1,0 +1,19 @@
+p#notice = notice
+
+.panel.panel-default
+  .panel-heading
+    h3.panel-title = @pc.name
+  .panel-body
+    - @pc.pc_skills.each do |pc_skill|
+      = pc_skill.skill.name
+
+= simple_form_for([@pc, @pc.pc_skills.build]) do |f|
+  = f.association :skill, as: :radio_buttons, collection: Skill.sample(3)
+  = f.submit "次へ"
+
+
+
+
+= link_to 'Edit', edit_pc_path(@pc)
+'|
+= link_to 'Back', pcs_path

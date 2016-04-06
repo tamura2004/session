@@ -1,0 +1,19 @@
+h1 Listing pc_skills
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @pc_skills.each do |pc_skill|
+      tr
+        td = link_to 'Show', pc_skill
+        td = link_to 'Edit', edit_pc_skill_path(pc_skill)
+        td = link_to 'Destroy', pc_skill, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Pc skill', new_pc_skill_path
