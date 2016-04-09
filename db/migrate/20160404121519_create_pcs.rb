@@ -1,8 +1,9 @@
 class CreatePcs < ActiveRecord::Migration
   def change
     create_table :pcs do |t|
-      t.references :handle, index: true, foreign_key: true
-      t.references :pc_name, index: true, foreign_key: true
+      t.string :gender
+      t.string :handle
+      t.string :name
       t.integer :exp
       t.integer :level
       t.integer :hp

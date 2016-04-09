@@ -1,9 +1,5 @@
 = simple_form_for(@pc) do |f|
-  = f.error_notification
-
   .form-inputs
-    = f.association :handle, as: :radio_buttons, collection: Handle.sample(3)
-    = f.association :pc_name, as: :radio_buttons, collection: PcName.sample(3)
-
+	  = f.input :gender, as: :radio_buttons, collection: [["男性","male"],["女性","female"]], label: "性別を選択してください"
   .form-actions
-    = f.button :submit
+    = f.button :submit, label: "次へ"

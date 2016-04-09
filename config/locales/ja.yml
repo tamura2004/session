@@ -1,6 +1,15 @@
 ---
 ja:
   activerecord:
+    models:
+      pc: キャラクター
+      skill: スキル
+    attributes:
+      pc:
+        id: ID
+      skill:
+        type: 種類
+        name: 名称
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

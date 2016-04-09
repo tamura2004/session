@@ -7,13 +7,17 @@ p#notice = notice
     - @pc.pc_skills.each do |pc_skill|
       = pc_skill.skill.name
 
-= simple_form_for([@pc, @pc.pc_skills.build]) do |f|
-  = f.association :skill, as: :radio_buttons, collection: Skill.sample(3)
-  = f.submit "次へ"
+- if !@pc.name || !@pc.handle
+  =simple_form_for(@pc) do |f|
+    .form-input
+      = f.input :handle, as: :radio_buttons, collection: @pc.handles_candidate, label: "称号"
+      = f.input :name, as: :radio_buttons, collection: @pc.names_candidate, label: "氏名"
+    .form-actions
+      = f.button :submit, label: "次へ"
 
-
-
-
-= link_to 'Edit', edit_pc_path(@pc)
-'|
-= link_to 'Back', pcs_path
+- elsif @pc.skills.size < 3
+  = simple_form_for([@pc,@pc.pc_skills.build]) do |f|
+    .form-input
+      = f.association :skill, as: :radio_buttons, collection: Skill.sample(3), label: "スキルを選択してください"
+    .form-actions
+      = f.button :submit, label: "次へ"

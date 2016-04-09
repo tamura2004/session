@@ -11,24 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406132037) do
-
-  create_table "handles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20160406111059) do
 
   create_table "names", force: :cascade do |t|
     t.string   "type"
     t.string   "word"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pc_names", force: :cascade do |t|
-    t.string   "gender"
-    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,8 +31,9 @@ ActiveRecord::Schema.define(version: 20160406132037) do
   add_index "pc_skills", ["skill_id"], name: "index_pc_skills_on_skill_id"
 
   create_table "pcs", force: :cascade do |t|
-    t.integer  "handle_id"
-    t.integer  "pc_name_id"
+    t.string   "gender"
+    t.string   "handle"
+    t.string   "name"
     t.integer  "exp"
     t.integer  "level"
     t.integer  "hp"
@@ -53,9 +41,6 @@ ActiveRecord::Schema.define(version: 20160406132037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "pcs", ["handle_id"], name: "index_pcs_on_handle_id"
-  add_index "pcs", ["pc_name_id"], name: "index_pcs_on_pc_name_id"
 
   create_table "skills", force: :cascade do |t|
     t.string   "type"

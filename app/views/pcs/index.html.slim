@@ -8,7 +8,7 @@ table.table.table-bordered
   tbody
     - @pcs.each do |pc|
       tr
-        td = link_to pc.name, pc_path(pc)
+        td = link_to pc.full_name, pc_path(pc)
 
 br
 

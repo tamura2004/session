@@ -209,30 +209,6 @@ NAMES.each do |type,words|
   end
 end
 
-1000.times do |id|
-  Handle.seed do |s|
-    s.id = id
-    s.name = Name.handle
-  end
-end
-
-1000.times do |id|
-  gender = ["male","female"].sample
-  case gender
-  when "male"
-    PcName.seed do |s|
-      s.id = id
-      s.gender = gender
-      s.name = Name.male.random_name
-    end
-  when "female"
-    PcName.seed do |s|
-      s.id = id
-      s.gender = gender
-      s.name = Name.female.random_name
-    end
-  end
-end
 
 
 
