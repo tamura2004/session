@@ -2,13 +2,32 @@
   table.table.table-bordered.table-condensed
     tbody
       tr
+        td.inverse キャラクターシート
+
+  table.table.table-bordered.table-condensed
+    tbody
+      tr
         td.inverse PC名
-        td = link_to(@pc.full_name, edit_pc_name_path(@pc))
+        td = @pc.full_name
       tr
         td.inverse 種族名
-        td = link_to(@pc.race_name, edit_pc_race_path(@pc))
+        td = @pc.race_name
+
+  table.table.table-bordered.table-condensed
+    tbody
       tr
-        td.inverse 能力値
-        td = @pc.abilities_description
+        td.inverse 肉体
+        td.inverse 精神
+        td.inverse 速度
+        td.inverse 技術
+        td.inverse 支配
+        td.inverse 運命
+      tr
+        td = @pc.body
+        td = @pc.mind
+        td = @pc.speed
+        td = @pc.tech
+        td = @pc.rule
+        td = @pc.fate
 
 
