@@ -4,5 +4,8 @@ module SampleScopes
     scope :sample, -> n {
       where id: ids.sample(n)
     }
+    scope :choose, -> {
+      find(ids.sample)
+    }
   end
 end

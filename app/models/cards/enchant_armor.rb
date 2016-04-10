@@ -1,0 +1,2 @@
+class EnchantArmor < Card
+end

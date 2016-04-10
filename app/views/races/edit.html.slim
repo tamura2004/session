@@ -1,0 +1,6 @@
+=simple_form_for(@pc, url: pc_race_path(@pc)) do |f|
+  .form-input
+    = f.association :enchant_race, as: :radio_buttons, collection: @enchant_races, label: "特性を選択して下さい", label_method: :name_with_ability
+    = f.association :race, as: :radio_buttons, collection: @races, label: "種族を選択して下さい", label_method: :name_with_ability
+  .form-actions
+    = f.button :submit, label: "次へ"

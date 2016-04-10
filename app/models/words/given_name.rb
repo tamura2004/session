@@ -1,0 +1,2 @@
+class GivenName < Word
+end

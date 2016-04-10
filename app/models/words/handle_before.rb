@@ -1,0 +1,2 @@
+class HandleBefore < Word
+end

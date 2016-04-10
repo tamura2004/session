@@ -1,23 +1,14 @@
-p#notice = notice
+.container-fluid
+  table.table.table-bordered.table-condensed
+    tbody
+      tr
+        td.inverse PC名
+        td = link_to(@pc.full_name, edit_pc_name_path(@pc))
+      tr
+        td.inverse 種族名
+        td = link_to(@pc.race_name, edit_pc_race_path(@pc))
+      tr
+        td.inverse 能力値
+        td = @pc.abilities_description
 
-.panel.panel-default
-  .panel-heading
-    h3.panel-title = @pc.name
-  .panel-body
-    - @pc.pc_skills.each do |pc_skill|
-      = pc_skill.skill.name
 
-- if !@pc.name || !@pc.handle
-  =simple_form_for(@pc) do |f|
-    .form-input
-      = f.input :handle, as: :radio_buttons, collection: @pc.handles_candidate, label: "称号"
-      = f.input :name, as: :radio_buttons, collection: @pc.names_candidate, label: "氏名"
-    .form-actions
-      = f.button :submit, label: "次へ"
-
-- elsif @pc.skills.size < 3
-  = simple_form_for([@pc,@pc.pc_skills.build]) do |f|
-    .form-input
-      = f.association :skill, as: :radio_buttons, collection: Skill.sample(3), label: "スキルを選択してください"
-    .form-actions
-      = f.button :submit, label: "次へ"

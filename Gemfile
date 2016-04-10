@@ -31,3 +31,4 @@ gem 'simple_form'
 gem 'kaminari'
 gem "seed-fu"
 gem "quiet_assets"
+gem "roo"

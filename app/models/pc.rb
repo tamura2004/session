@@ -1,45 +1,58 @@
-class Pc < ActiveRecord::Base
-  has_many :pc_skills
-  has_many :skills, through: :pc_skills
+class Pc < Character
+  has_many :skills, class_name: "PcSkill"
+  belongs_to :handle_before
+  belongs_to :handle_after
+  belongs_to :family_name
+  belongs_to :given_name
+  belongs_to :enchant_race
+  belongs_to :race
 
-  before_validation do
-    self.handle = hex2utf8(handle) if hex?(handle)
-    self.name = hex2utf8(name) if hex?(name)
+  def abilities_description
+    "肉体：#{body} 精神：#{mind} 速度：#{speed} 技術：#{tech} 支配：#{rule} 運命：#{fate}"
+  end
+
+  def body
+    enchant_race.body + race.body
+  end
+
+  def mind
+    enchant_race.mind + race.mind
+  end
+
+  def speed
+    enchant_race.speed + race.speed
+  end
+
+  def tech
+    enchant_race.tech + race.tech
+  end
+
+  def rule
+    enchant_race.rule + race.rule
+  end
+
+  def fate
+    enchant_race.fate + race.fate
+  end
+
+  def handle
+    handle_before.name + handle_after.name
+  end
+
+  def name
+    family_name.name + " " + given_name.name
   end
 
   def full_name
-    "“#{handle}” #{name}"
+    "\"#{handle}\" #{name}"
+  end
+
+  def race_name
+    "#{enchant_race.name}#{race.name}"
   end
 
   def male?
     gender == "male"
-  end
-
-  def names_candidate
-    candidate = Array.new(3) do
-      names = male? ? Name.male : Name.female
-      utf8_with_hex(names.random_name)
-    end
-  end
-
-  def handles_candidate
-    candidate = Array.new(3) do
-      utf8_with_hex(Name.handle)
-    end
-  end
-
-  private
-
-  def hex2utf8(hex)
-    [hex].pack("H*").force_encoding("utf-8")
-  end
-
-  def hex?(str)
-    str && str =~ /^[0-9a-zA-Z]+$/
-  end
-
-  def utf8_with_hex(utf8)
-    [utf8, utf8.unpack("H*").first]
   end
 
 end

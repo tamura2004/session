@@ -14,8 +14,16 @@ class PcsController < ApplicationController
 
   # GET /pcs/new
   def new
-    @pc = Pc.new
+    redirect_to new_gender_path
   end
+
+  # def select_name
+  #   @handles = @pc.handles_candidate
+  #   @names = @pc.names_candidate
+  # end
+
+  # def select_skills
+  # end
 
   # GET /pcs/1/edit
   def edit

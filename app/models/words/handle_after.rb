@@ -1,0 +1,2 @@
+class HandleAfter < Word
+end
