@@ -5,6 +5,11 @@ class SelectsController < ApplicationController
     @select_form = SelectForm.new(current_player)
   end
 
+  def show
+    redirect_to pc_path(current_pc)
+  end
+
+
   def create
     session[:pc_id] = params[:select_form][:pc_id]
     redirect_to :game_main

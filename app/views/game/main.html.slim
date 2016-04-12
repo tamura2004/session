@@ -1,13 +1,12 @@
 table.table.table-bordered.table-condensed
   tbody
     tr
-      td.inverse シナリオ
-      td = current_encounter.scinario.name
-      td = current_encounter.scinario.memo
-    tr
-      td.inverse 遭遇
-      td = current_encounter.name
-      td = current_encounter.memo
+      td.inverse.col-xs-1 シナリオ
+      td.col-xs-2 = current_encounter.scinario.name
+      td.col-xs-3 = current_encounter.scinario.memo
+      td.inverse.col-xs-1 遭遇
+      td.col-xs-2 = current_encounter.name
+      td.col-xs-3 = current_encounter.memo
 
 table.table.table-bordered.table-condensed
   tbody

@@ -1,5 +1,7 @@
 class PcsController < ApplicationController
+  before_action :check_player
   before_action :set_pc, only: [:show, :edit, :update, :destroy]
+
 
   # GET /pcs
   # GET /pcs.json
@@ -14,12 +16,9 @@ class PcsController < ApplicationController
 
   # GET /pcs/new
   def new
-    if current_player
-      @pc = Pc.create(player_id: current_player.id)
-      redirect_to edit_pc_name_path(@pc)
-    else
-      redirect_to new_login_path
-    end
+    @pc = Pc.create(player_id: current_player.id)
+    session[:pc_id] = @pc.id
+    redirect_to edit_pc_name_path(@pc)
   end
 
   # GET /pcs/1/edit
@@ -28,33 +27,33 @@ class PcsController < ApplicationController
 
   # POST /pcs
   # POST /pcs.json
-  def create
-    @pc = Pc.new(pc_params)
+  # def create
+  #   @pc = Pc.new(pc_params)
 
-    respond_to do |format|
-      if @pc.save
-        format.html { redirect_to @pc, notice: 'Pc was successfully created.' }
-        format.json { render :show, status: :created, location: @pc }
-      else
-        format.html { render :new }
-        format.json { render json: @pc.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @pc.save
+  #       format.html { redirect_to @pc, notice: 'Pc was successfully created.' }
+  #       format.json { render :show, status: :created, location: @pc }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @pc.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /pcs/1
   # PATCH/PUT /pcs/1.json
-  def update
-    respond_to do |format|
-      if @pc.update(pc_params)
-        format.html { redirect_to @pc, notice: 'Pc was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pc }
-      else
-        format.html { render :edit }
-        format.json { render json: @pc.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @pc.update(pc_params)
+  #       format.html { redirect_to @pc, notice: 'Pc was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @pc }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @pc.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /pcs/1
   # DELETE /pcs/1.json
@@ -75,5 +74,11 @@ class PcsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pc_params
       params.require(:pc).permit(:gender, :handle, :name)
+    end
+
+    def check_player
+      unless current_player
+        redirect_to :new_login
+      end
     end
 end

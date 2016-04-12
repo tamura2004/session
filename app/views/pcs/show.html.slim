@@ -2,29 +2,30 @@
   table.table.table-bordered.table-condensed
     tbody
       tr
-        td.inverse キャラクターシート
+        td キャラクターシート
 
   table.table.table-bordered.table-condensed
     tbody
       tr
-        td.inverse PC名
+        td.inverse.col-xs-4 PC名
+        td.inverse.col-xs-3 種族
+        td.inverse.col-xs-3 クラス
+        td.inverse.col-xs-2 PL
+      tr
         td = @pc.full_name
-      tr
-        td.inverse 種族
         td = @pc.race_name
-      tr
-        td.inverse クラス
-        td = @pc.klasses.map(&:name).join(" / ")
+        td = @pc.klass_name
+        td = @pc.player.name
 
   table.table.table-bordered.table-condensed
     tbody
       tr
-        td.inverse 肉体
-        td.inverse 精神
-        td.inverse 速度
-        td.inverse 技術
-        td.inverse 支配
-        td.inverse 運命
+        td.inverse.col-xs-2 肉体
+        td.inverse.col-xs-2 精神
+        td.inverse.col-xs-2 速度
+        td.inverse.col-xs-2 技術
+        td.inverse.col-xs-2 支配
+        td.inverse.col-xs-2 運命
       tr
         td = @pc.body
         td = @pc.mind

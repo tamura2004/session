@@ -4,7 +4,7 @@ class KlassesController < ApplicationController
   def new
     @klass = PcKlass.new
     @candidates = 6.times.map do
-      Klass.sample(3).instance_eval do
+      Klass.sample(2).instance_eval do
         [
           pluck(:name).join(" / "),
           ids.join("|")

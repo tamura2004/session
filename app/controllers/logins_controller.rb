@@ -11,6 +11,7 @@ class LoginsController < ApplicationController
 
   def destroy
     session.delete(:player_id)
-    redirect_to :game_main
+    session.delete(:pc_id)
+    redirect_to :new_login
   end
 end

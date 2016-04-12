@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  root "game#main"
+
   get 'game/main'
   get 'game/start'
   get 'game/over'
-  get "game/select"
-  get "game/logout"
+  # get "game/select"
+  # get "game/logout"
   post "game/create"
 
   resources :monsters
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
   resources :players
 
   resource :login, only: [:new,:create,:destroy]
-  resource :select, only: [:new,:create,:destroy]
+  resource :select, only: [:show, :new, :create, :destroy]
 
   resources :pcs do
     resource :name, only: [:edit, :update]

@@ -8,6 +8,7 @@ class Pc < Character
   belongs_to :given_name
   belongs_to :enchant_race
   belongs_to :race
+  belongs_to :player
 
   attr_accessor :words
   attr_accessor :races
@@ -57,7 +58,7 @@ class Pc < Character
   end
 
   def klass_name
-    klasses.map(&:name).join(" / ")
+    "主:%s／副:%s" % klasses.map(&:name)
   end
 
   def male?
