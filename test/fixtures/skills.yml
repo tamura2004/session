@@ -1,11 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  type: 
   name: MyString
-  description: MyText
+  timing: MyString
+  kind: MyString
+  mp: MyString
+  range: MyString
+  target: MyString
+  attribute: MyString
+  power: MyString
+  effect: MyString
 
 two:
-  type: 
   name: MyString
-  description: MyText
+  timing: MyString
+  kind: MyString
+  mp: MyString
+  range: MyString
+  target: MyString
+  attribute: MyString
+  power: MyString
+  effect: MyString

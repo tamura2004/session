@@ -1,6 +1,45 @@
+/ <form novalidate="novalidate" class="simple_form edit_pc" id="edit_pc_2" action="/pcs/2/race" accept-charset="UTF-8" method="post">
+/   <div class="form-input">
+/     <div class="form-group radio_buttons optional pc_race">
+/       <label class="radio_buttons optional control-label">種族を選択して下さい
+/       </label>
+/       <span class="radio">
+/         <label for="pc_race_4921">
+/           <input class="radio_buttons optional" type="radio" value="49|21" name="pc[race]" id="pc_race_4921" />運命のオーク
+/         </label>
+/       </span>
+/     </div>
+/   </div>
+/ </form>
+
+
 =simple_form_for(@pc, url: pc_race_path(@pc)) do |f|
   .form-input
-    = f.association :enchant_race, as: :radio_buttons, collection: @enchant_races, label: "特性を選択して下さい", label_method: :name_with_ability
-    = f.association :race, as: :radio_buttons, collection: @races, label: "種族を選択して下さい", label_method: :name_with_ability
+    .form-group.radio_buttons.optional.pc_race
+      label.radio_buttons.optional.control-label 種族を選択してください
+
+      table.table.table-bordered.table-condensed
+        tbody
+          tr
+            td.inverse 種族
+            td.inverse 肉体
+            td.inverse 精神
+            td.inverse 速度
+            td.inverse 技術
+            td.inverse 支配
+            td.inverse 運命
+          - @race_form.races.each do |race|
+            tr
+              td
+                span.radio
+                  label for="pc_race_#{race.value}"
+                    input.radio_buttons.optional type="radio" name="pc[race]" id="pc_race_#{race.value}" value="#{race.value}" = race.label
+              td = race.body
+              td = race.mind
+              td = race.speed
+              td = race.tech
+              td = race.rule
+              td = race.fate
+
   .form-actions
     = f.button :submit, label: "次へ"

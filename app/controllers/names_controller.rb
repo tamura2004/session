@@ -3,19 +3,25 @@ class NamesController < ApplicationController
 
   # GET /pcs/:pc_id/name/edit
   def edit
-    @handles_before = HandleBefore.sample(3)
-    @handles_after = HandleAfter.sample(3)
-    @family_names = FamilyName.sample(3)
-    if @pc.gender = "male"
-      @given_names = GivenName.male.sample(3)
-    else
-      @given_names = GivenName.female.sample(3)
+    @names = 6.times.map do
+      words.instance_eval do
+        [
+          sprintf("\"%s%s\" %s %s",*map(&:name)),
+          map(&:id).join("|")
+        ]
+      end
     end
   end
 
   # PATCH/PUT /pcs/:pc_id/name
   def update
-    if @pc.update(pc_params)
+    a,b,c,d = pc_params[:words].split("|")
+    @pc.handle_before_id = a
+    @pc.handle_after_id = b
+    @pc.family_name_id = c
+    @pc.given_name_id = d
+
+    if @pc.save
       redirect_to edit_pc_race_path(@pc)
     else
       render :edit
@@ -23,6 +29,12 @@ class NamesController < ApplicationController
   end
 
   private
+    def words
+      %w(HandleBefore HandleAfter FamilyName GivenName).map do |type|
+        w = Word.where(type: type).choose
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_pc
       @pc = Pc.find(params[:pc_id])
@@ -30,6 +42,6 @@ class NamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pc_params
-      params.require(:pc).permit(:handle_before_id,:handle_after_id,:family_name_id,:given_name_id)
+      params.require(:pc).permit(:words)
     end
 end

@@ -1,11 +1,16 @@
 class Pc < Character
   has_many :skills, class_name: "PcSkill"
+  has_many :klasses, class_name: "PcKlass"
+
   belongs_to :handle_before
   belongs_to :handle_after
   belongs_to :family_name
   belongs_to :given_name
   belongs_to :enchant_race
   belongs_to :race
+
+  attr_accessor :words
+  attr_accessor :races
 
   def abilities_description
     "肉体：#{body} 精神：#{mind} 速度：#{speed} 技術：#{tech} 支配：#{rule} 運命：#{fate}"
@@ -49,6 +54,10 @@ class Pc < Character
 
   def race_name
     "#{enchant_race.name}#{race.name}"
+  end
+
+  def klass_name
+    klasses.map(&:name).join(" / ")
   end
 
   def male?

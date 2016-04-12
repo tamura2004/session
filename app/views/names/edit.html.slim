@@ -1,9 +1,6 @@
 =simple_form_for(@pc, url: pc_name_path(@pc)) do |f|
   .form-input
-    = f.association :handle_before, as: :radio_buttons, collection: @handles_before, label: "称号の前半を選んで下さい"
-    = f.association :handle_after, as: :radio_buttons, collection: @handles_after, label: "称号の後半を選んで下さい"
-    = f.association :family_name, as: :radio_buttons, collection: @family_names, label: "姓を選んで下さい"
-    = f.association :given_name, as: :radio_buttons, collection: @given_names, label: "名前を選んで下さい"
+    = f.input :words, as: :radio_buttons, collection: @names, label: "キャラクターを作成します。名前を選んで下さい(後から変更できます)"
 
   .form-actions
-    = f.button :submit, label: "次へ"
+    = f.button :submit, value: "次へ"

@@ -1,0 +1,9 @@
+= simple_form_for(@monster) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :hp
+
+  .form-actions
+    = f.button :submit

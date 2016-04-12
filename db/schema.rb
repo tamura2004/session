@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410092552) do
+ActiveRecord::Schema.define(version: 20160412035351) do
 
   create_table "cards", force: :cascade do |t|
     t.string   "type"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160410092552) do
 
   create_table "characters", force: :cascade do |t|
     t.string   "type"
+    t.integer  "player_id"
     t.string   "gender"
     t.string   "name_order"
     t.integer  "handle_before_id"
@@ -68,6 +69,96 @@ ActiveRecord::Schema.define(version: 20160410092552) do
   add_index "characters", ["handle_before_id"], name: "index_characters_on_handle_before_id"
   add_index "characters", ["klass_id"], name: "index_characters_on_klass_id"
   add_index "characters", ["race_id"], name: "index_characters_on_race_id"
+
+  create_table "encounters", force: :cascade do |t|
+    t.string   "name"
+    t.text     "memo"
+    t.integer  "scinario_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "encounters_monsters", force: :cascade do |t|
+    t.string   "label"
+    t.integer  "hp"
+    t.integer  "monster_id"
+    t.integer  "encounter_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "encounters_monsters", ["encounter_id"], name: "index_encounters_monsters_on_encounter_id"
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "encounter_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "games", ["encounter_id"], name: "index_games_on_encounter_id"
+
+  create_table "klasses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "monsters", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "hp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pc_klasses", force: :cascade do |t|
+    t.integer  "pc_id"
+    t.integer  "klass_id"
+    t.decimal  "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pc_klasses", ["klass_id"], name: "index_pc_klasses_on_klass_id"
+  add_index "pc_klasses", ["pc_id"], name: "index_pc_klasses_on_pc_id"
+
+  create_table "pc_skills", force: :cascade do |t|
+    t.integer  "pc_id"
+    t.integer  "skill_id"
+    t.decimal  "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "pc_skills", ["pc_id"], name: "index_pc_skills_on_pc_id"
+  add_index "pc_skills", ["skill_id"], name: "index_pc_skills_on_skill_id"
+
+  create_table "players", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "pc_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "scinarios", force: :cascade do |t|
+    t.string   "name"
+    t.text     "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name"
+    t.string   "timing"
+    t.string   "kind"
+    t.string   "mp"
+    t.string   "range"
+    t.string   "target"
+    t.string   "element"
+    t.string   "power"
+    t.string   "effect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "words", force: :cascade do |t|
     t.string   "type"

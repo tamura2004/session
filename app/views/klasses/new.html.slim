@@ -1,0 +1,5 @@
+= simple_form_for(@klass, url: pc_klasses_path(@pc)) do |f|
+  .form-input
+    = f.input :klass_id, as: :radio_buttons, collection: @candidates, label: "クラスを選んで下さい"
+  .form-actions
+    = f.button :submit, label: "次へ"

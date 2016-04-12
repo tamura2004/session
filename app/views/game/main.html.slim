@@ -1,0 +1,29 @@
+table.table.table-bordered.table-condensed
+  tbody
+    tr
+      td.inverse シナリオ
+      td = current_encounter.scinario.name
+      td = current_encounter.scinario.memo
+    tr
+      td.inverse 遭遇
+      td = current_encounter.name
+      td = current_encounter.memo
+
+table.table.table-bordered.table-condensed
+  tbody
+    tr
+      td.inverse モンスター名
+      td.inverse 個体識別
+      td.inverse hp
+    - current_encounter.monsters.each do |monster|
+      tr
+        td = monster.monster.name
+        td = monster.label
+        td = "#{monster.hp} / #{monster.monster.hp}"
+
+= simple_form_for(@battle_form, url: "/game/create") do |f|
+  .form-input
+    = f.input :action, as: :radio_buttons, collection: [["攻撃",1],["ヒール",2],["逃げる",3]], label: "アクション"
+    = f.input :monster_id, as: :radio_buttons, collection: @battle_form.monsters,label: "対象"
+  .form-action
+    = f.button :submit, value: "決定"

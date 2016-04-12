@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @monster.name
+p
+  strong Hp:
+  = @monster.hp
+
+= link_to 'Edit', edit_monster_path(@monster)
+'|
+= link_to 'Back', monsters_path

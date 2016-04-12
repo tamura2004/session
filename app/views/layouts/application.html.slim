@@ -25,13 +25,15 @@ html lang="ja"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand href="#"クイックRPG
+          a.navbar-brand href="/game/main" = current_encounter.scinario.name
           .navbar-collapse.collapse.navbar-responsive-collapse
             ul.nav.navbar-nav
-              li= link_to "キャラクターを作る", new_pc_path
-              li= link_to "キャラクターを選ぶ", pcs_path
-              li= link_to "冒険を始める", pcs_path
-              li= link_to "ゲームマスター", "/path3"
+              li= link_to current_encounter.name, game_main_path
+              li= link_to "パーティ", pcs_path
+              //- if current_pc
+                //li= link_to "キャラクターシート", pc_path(current_pc)
+              //li= link_to current_player_name, new_login_path
+              //li= link_to current_pc_name, :new_select
 
     .container
       = bootstrap_flash

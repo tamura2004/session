@@ -3,6 +3,8 @@ class CreateCharacters < ActiveRecord::Migration
     create_table :characters do |t|
       t.string :type
 
+      t.references :player
+
       t.string :gender
 
       t.string :name_order # :east, :west

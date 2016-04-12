@@ -1,0 +1,5 @@
+= simple_form_for(current_player) do |f|
+  .form-input
+    = f.association :pc, as: :radio_buttons, collection: Pc.where(player_id: current_player.id)
+  .form-actions
+    = f.button :submit, value: "決定"

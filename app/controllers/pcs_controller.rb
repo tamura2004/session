@@ -14,16 +14,13 @@ class PcsController < ApplicationController
 
   # GET /pcs/new
   def new
-    redirect_to new_gender_path
+    if current_player
+      @pc = Pc.create(player_id: current_player.id)
+      redirect_to edit_pc_name_path(@pc)
+    else
+      redirect_to new_login_path
+    end
   end
-
-  # def select_name
-  #   @handles = @pc.handles_candidate
-  #   @names = @pc.names_candidate
-  # end
-
-  # def select_skills
-  # end
 
   # GET /pcs/1/edit
   def edit

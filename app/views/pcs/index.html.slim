@@ -1,15 +1,26 @@
-h1 キャラクターを選択してください
-
-table.table.table-bordered
-  thead
-    tr
-      th キャラクター名
-
+table.table.table-bordered.table-condensed
   tbody
+    tr
+      td.inverse キャラクター名
+      td.inverse 種族
+      td.inverse クラス
+      td.inverse 肉体
+      td.inverse 精神
+      td.inverse 速度
+      td.inverse 技術
+      td.inverse 支配
+      td.inverse 運命
+
     - @pcs.each do |pc|
       tr
-        td = link_to pc.full_name, pc_path(pc)
+        td = pc.full_name
+        td = pc.race_name
+        td = pc.klass_name
+        td = pc.body
+        td = pc.mind
+        td = pc.speed
+        td = pc.tech
+        td = pc.rule
+        td = pc.fate
 
-br
-
-= link_to 'New Pc', new_pc_path
+/ マッサージチェアsks4500 製品番号k4600010
