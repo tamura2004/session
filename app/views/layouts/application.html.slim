@@ -4,7 +4,7 @@ html lang="ja"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "Session"
+    title= content_for?(:title) ? yield(:title) : "戦国Wiz"
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
@@ -25,7 +25,7 @@ html lang="ja"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand href="/game/main" = HandleBefore.choose.name + HandleAfter.choose.name
+          a.navbar-brand href="/menu/top" 戦国Wiz
           .navbar-collapse.collapse.navbar-responsive-collapse
             ul.nav.navbar-nav
               li = link_to "パーティ", pcs_path

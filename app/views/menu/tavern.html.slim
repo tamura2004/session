@@ -1,0 +1,10 @@
+.panel.panel-default
+  .panel-heading
+    h3.panel-title ギルガメッシュの酒場
+  .panel-body
+    li.list-group-item = link_to "パーティに加える", :tavern_add
+    li.list-group-item = link_to "パーティから外す", :tavern_remove
+    li.list-group-item = link_to "ステータスを見る", :tavern_stat
+    li.list-group-item = link_to "お金を山分けする", :tavern_share
+    li.list-group-item = link_to "酒場を出る", :menu_top
+
