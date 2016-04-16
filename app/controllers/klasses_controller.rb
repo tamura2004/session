@@ -17,7 +17,7 @@ class KlassesController < ApplicationController
     klass_params[:klass_id].split("|").each do |id|
       PcKlass.create(pc_id: pc_id, klass_id: id)
     end
-    redirect_to new_pc_skill_path(@pc)
+    redirect_to :training_top
   end
 
   private

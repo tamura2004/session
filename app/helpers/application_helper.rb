@@ -1,2 +1,36 @@
 module ApplicationHelper
+  def btn_lg(name, path)
+    link_to name, path, class: "btn btn-primary btn-lg"
+  end
+
+  def panel(title,&block)
+    content_tag(:div, class: %w(panel panel-default)) do
+      concat content_tag(:div, title, class: "panel-heading")
+      concat content_tag(:div, class: "panel-body", &block)
+    end
+  end
+
+  def list_group(&block)
+    content_tag(:div, class: "list-group", &block)
+  end
+
+  def list_item(name, path)
+    link_to name, path, class: "list-group-item"
+  end
+
+  def button_item(name, path)
+    link_to name, path, class: "list-group-item", method: :post
+  end
+
 end
+
+# .panel.panel-primary
+#   .panel-heading
+#     h3.panel-title リルガミン城
+#   .panel-body
+#     .list-group
+#       = list "ギルガメッシュの酒場", :tavern_top
+#       = list "冒険者の宿", :inn_top
+#       = list "ボルタック商店", :trade_top
+#       = list "カント寺院", :temple_top
+#       = list "街外れ", :edge_top

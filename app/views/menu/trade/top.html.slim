@@ -1,0 +1,35 @@
+.panel.panel-default
+  .panel-heading "ボルタック商店"
+  .panel-body
+    = list_group
+      = list_item "アイテムを買う", :trade_buy
+      = list_item "アイテムを売る", :trade_sell
+      = list_item "呪いを解く", :trade_dispel
+      = list_item "アイテムを鑑定する", :trade_identify
+      = list_item "お金を集める", :trade_gold
+      = list_item "商店を出る", :main_top
+
+  table.table
+    tbody
+      tr
+        td.inverse.col-xs-2 キャラクター名
+        td.inverse.col-xs-2 種族
+        td.inverse.col-xs-2 クラス
+        td.inverse.col-xs-1 筋力
+        td.inverse.col-xs-1 敏捷
+        td.inverse.col-xs-1 耐久
+        td.inverse.col-xs-1 知力
+        td.inverse.col-xs-1 判断
+        td.inverse.col-xs-1 魅力
+
+      - @pcs.each do |pc|
+        tr
+          td = pc.full_name
+          td = pc.race_name
+          td = pc.klass_name
+          td = pc.body
+          td = pc.mind
+          td = pc.speed
+          td = pc.tech
+          td = pc.rule
+          td = pc.fate

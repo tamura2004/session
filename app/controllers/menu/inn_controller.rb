@@ -1,7 +1,4 @@
 class Menu::InnController < ApplicationController
-  def top
-  end
-
   def select
   end
 

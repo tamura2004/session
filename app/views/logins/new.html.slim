@@ -1,5 +1,10 @@
-= simple_form_for(@login_form, url: login_path) do |f|
-  .form-input
-    = f.input :player_id, as: :radio_buttons, collection: @login_form.players, label: "プレイヤーを選んで下さい"
-  .form-actions
-    = f.button :submit, value: "ログイン"
+/ = simple_form_for(@login_form, url: login_path) do |f|
+/   .form-input
+/     = f.input :player_id, as: :radio_buttons, collection: @login_form.players, label: "プレイヤーを選んで下さい"
+/   .form-actions
+/     = f.button :submit, value: "ログイン"
+
+= panel "プレイヤーを選んで下さい"
+  = list_group
+    - @players.each do |player|
+      = button_item player.name, login_path(player_id: player.id)

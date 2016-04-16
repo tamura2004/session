@@ -1,0 +1,2 @@
+module Menu::TitleHelper
+end

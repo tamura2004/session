@@ -21,6 +21,8 @@ module Session
     # generatorの設定
     config.generators do |g|
       g.template_engine :slim
+      g.helper false
+      g.assets false
     end
 
     # libファイルの自動読み込み
@@ -28,6 +30,8 @@ module Session
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
     # modelサブフォルダ
+    # config.autoload_paths += Dir[Rails.root.join("app","views","menus")]
+    # config.autoload_paths += Dir[Rails.root.join("app","controllers","menus")]
     config.autoload_paths += Dir[Rails.root.join("app","models","cards")]
     config.autoload_paths += Dir[Rails.root.join("app","models","words")]
 

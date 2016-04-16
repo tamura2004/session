@@ -4,7 +4,7 @@ html lang="ja"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "戦国Wiz"
+    title 戦国DD
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
     = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
@@ -19,20 +19,9 @@ html lang="ja"
 
 
   body
-    .navbar.navbar-default.navbar-static-top
-        .container
-          button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand href="/menu/top" 戦国Wiz
-          .navbar-collapse.collapse.navbar-responsive-collapse
-            ul.nav.navbar-nav
-              li = link_to "パーティ", pcs_path
-              li= link_to "キャラクターシート", :select
-              li = link_to "ログアウト", :login, method: :delete
-              //li= link_to current_player_name, new_login_path
-              //li= link_to current_pc_name, :new_select
+    = nav_bar fixes: :top, brand: "戦国ダンジョン", brand_link: :title_top, responsive: true
+    = glyph(:pencil)
+      i.icon-pencil
 
     .container
       = bootstrap_flash

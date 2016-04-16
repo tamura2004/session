@@ -1,56 +1,33 @@
 Rails.application.routes.draw do
-  root "menu#top"
-  # get "game/select"
-  get 'camp/abort'
-  get 'camp/exit'
-  get 'camp/reorder'
-  get 'camp/search'
-  get 'camp/stat'
-  get 'camp/top'
 
-  get 'game/main'
-  get 'game/over'
-  get 'game/start'
+  root "menu/title#top"
 
-  get 'inn/economy'
-  get 'inn/horse'
-  get 'inn/royal'
-  get 'inn/select'
-  get 'inn/simple'
-  get 'inn/sweet'
+  MENUS = {
+    title: %w(top),
+    main: %w(top restart),
+    tavern: %w(top add exit remove share stat),
+    inn: %w(top economy horse royal select simple sweet),
+    trade: %w(top buy dispel gold identify sell),
+    temple: %w(top),
+    edge: %w(top restart),
+    training: %w(top),
+    maze: %w(top up down),
+    camp: %w(top abort exit reorder search stat),
+  }
 
-  get 'maze/down'
-  get 'maze/top'
-  get 'maze/up'
+  MENUS.each do |controller,actions|
+    actions.each do |action|
+      get "menu/#{controller}/#{action}", as: "#{controller}_#{action}"
+    end
+  end
 
-  get 'menu/edge'
-  get 'menu/inn'
-  get 'menu/restart'
-  get 'menu/tavern'
-  get 'menu/temple'
-  get 'menu/top'
-  get 'menu/title'
-  get 'menu/trade'
-
-  get 'tavern/add'
-  get 'tavern/exit'
-  get 'tavern/remove'
-  get 'tavern/share'
-  get 'tavern/stat'
-  get 'trade/buy'
-  get 'trade/dispel'
-  get 'trade/gold'
-  get 'trade/identify'
-  get 'trade/sell'
-  get 'training/top'
-  # get "game/logout"
   post "game/create"
   resources :monsters
   resources :scinarios
   resources :encounters
   resources :players
-  resource :login, only: [:new,:create,:destroy]
   resource :select, only: [:show, :new, :create, :destroy]
+  resource :login, only:  [:new, :create, :destroy]
   resources :pcs do
     resource :name, only: [:edit, :update]
     resource :race, only: [:edit, :update]
@@ -58,4 +35,5 @@ Rails.application.routes.draw do
     resources :skills, only: [:new, :create]
     resources :action, only: [:new,:create]
   end
+
 end

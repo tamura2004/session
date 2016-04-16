@@ -1,17 +1,22 @@
 class LoginsController < ApplicationController
   def new
-    @login_form = LoginForm.new
+    @players = Player.all
   end
 
   def create
-    session[:player_id] = params[:login_form][:player_id]
+    session[:player_id] = params[:player_id]
     session.delete(:pc_id)
-    redirect_to :game_main
+    redirect_to :main_top
+  end
+
+  def select
+    session[:player_id] = params[:player_id]
+    redirect_to :main_top
   end
 
   def destroy
     session.delete(:player_id)
     session.delete(:pc_id)
-    redirect_to :menu_title
+    redirect_to :title
   end
 end
