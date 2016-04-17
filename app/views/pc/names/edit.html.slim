@@ -1,0 +1,4 @@
+= panel "名前を選んで下さい"
+  = list_group
+    - @names.each do |name|
+      = select_item name, pc_name_path(@pc, name: name)

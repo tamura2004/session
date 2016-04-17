@@ -7,6 +7,35 @@ ja:
     attributes:
       pc:
         id: ID
+        name: 名前
+        size: サイズ
+        race: 種族
+        klass: クラス
+        alignment: 属性
+        exp: 経験値
+        level: レベル
+        gp: gp
+        ac: アーマークラス
+        ac_type: アーマークラス種別
+        hp: hp
+        hp_formula: ヒットポイント計算式
+        speed: 移動速度
+        str: 筋力
+        dex: 敏捷
+        con: 耐久
+        int: 知力
+        wis: 判断
+        cha: 魅力
+        skill: 一般技能
+        sense: 感覚
+        damage_vulnerability: ダメージ脆弱性
+        damage_resistance: ダメージ抵抗
+        damage_immunity: ダメージ完全耐性
+        language: 言語
+        challenge: 脅威度
+        condition: 状態異常
+        party: 所属パーティ
+
       skill:
         type: 種類
         name: 名称

@@ -20,10 +20,10 @@ html lang="ja"
 
   body
     = nav_bar fixes: :top, brand: "戦国ダンジョン", brand_link: :title_top, responsive: true
-    = glyph(:pencil)
-      i.icon-pencil
 
     .container
-      = bootstrap_flash
-      = yield
+      .row
+        .col-lg-6.col-md-8.col-sm-10
+          = bootstrap_flash
+          = yield
 

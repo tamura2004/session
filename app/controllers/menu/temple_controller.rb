@@ -1,4 +1,4 @@
-class Menu::TempleController < ApplicationController
+class Menu::TempleController < Menu::MainController
   def top
   end
 end

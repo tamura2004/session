@@ -9,6 +9,24 @@ class Pc::RacesController < ApplicationController
   # PATCH/PUT /pcs/:pc_id/name
   def update
     @pc.race = params[:race]
+    case @pc.race
+    when "ヒューマン"
+      @pc.str += 1
+      @pc.str += 1
+      @pc.str += 1
+      @pc.str += 1
+      @pc.str += 1
+      @pc.str += 1
+    when "ドワーフ"
+      @pc.con += 2
+    when "エルフ"
+      @pc.int += 1
+    when "ハーフリング"
+      @pc.dex += 2
+    end
+
+
+
 
     if @pc.save
       redirect_to edit_pc_klass_path(@pc)

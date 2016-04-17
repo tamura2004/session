@@ -1,6 +1,0 @@
-=simple_form_for(@pc, url: pc_name_path(@pc)) do |f|
-  .form-input
-    = f.input :words, as: :radio_buttons, collection: @names, label: "キャラクターを作成します。名前を選んで下さい(後から変更できます)"
-
-  .form-actions
-    = f.button :submit, value: "次へ"

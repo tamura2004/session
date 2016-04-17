@@ -1,4 +1,4 @@
-class Menu::EdgeController < ApplicationController
+class Menu::EdgeController < Menu::MainController
   def top
   end
 

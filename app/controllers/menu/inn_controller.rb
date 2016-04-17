@@ -1,4 +1,4 @@
-class Menu::InnController < ApplicationController
+class Menu::InnController < Menu::MainController
   def select
   end
 

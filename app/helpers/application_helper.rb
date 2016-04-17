@@ -26,6 +26,10 @@ module ApplicationHelper
     link_to name, path, class: "list-group-item", method: :patch
   end
 
+  def delete_item(name, path)
+    link_to name, path, class: "list-group-item", method: :delete
+  end
+
 end
 
 # .panel.panel-primary

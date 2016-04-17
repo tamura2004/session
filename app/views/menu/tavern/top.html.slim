@@ -6,3 +6,21 @@
     = list_item "お金を山分けする", :tavern_share
     = list_item "酒場を出る", :main_top
 
+= panel "パーティ"
+  table.table.table-bordered.table-condensed
+    tbody
+      tr
+        td.inverse.col-xs-4 キャラクター名
+        td.inverse.col-xs-3 種族
+        td.inverse.col-xs-3 クラス
+        td.inverse.col-xs-1 hp
+        td.inverse.col-xs-1 gp
+
+      - if party = current_player.parties.find_by_area("town")
+        - party.pcs.each do |pc|
+          tr
+            td = pc.name
+            td = pc.race
+            td = pc.klass
+            td = pc.hp
+            td = pc.gp

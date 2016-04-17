@@ -1,2 +1,4 @@
-h1 Tavern#remove
-p Find me in app/views/tavern/remove.html.slim
+= panel "パーティから外すキャラクターを選択して下さい"
+  = list_group
+    - @pcs.find_each do |pc|
+      = delete_item pc.stat, pc_party_path(pc)

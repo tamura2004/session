@@ -13,7 +13,7 @@ class Pc::AbilitiesController < ApplicationController
     end
 
     if @pc.save
-      redirect_to :training_top
+      redirect_to edit_pc_race_path(@pc)
     else
       render :edit
     end

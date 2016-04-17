@@ -1,39 +1,25 @@
-class NamesController < ApplicationController
+class Pc::NamesController < ApplicationController
   before_action :set_pc, only: [:edit, :update]
 
   # GET /pcs/:pc_id/name/edit
   def edit
     @names = 6.times.map do
-      words.instance_eval do
-        [
-          sprintf("\"%s%s\" %s %s",*map(&:name)),
-          map(&:id).join("|")
-        ]
-      end
+      GivenName.choose.name
     end
   end
 
   # PATCH/PUT /pcs/:pc_id/name
   def update
-    a,b,c,d = pc_params[:words].split("|")
-    @pc.handle_before_id = a
-    @pc.handle_after_id = b
-    @pc.family_name_id = c
-    @pc.given_name_id = d
+    @pc.name = params[:name]
 
     if @pc.save
-      redirect_to edit_pc_race_path(@pc)
+      redirect_to :training_top
     else
       render :edit
     end
   end
 
   private
-    def words
-      %w(HandleBefore HandleAfter FamilyName GivenName).map do |type|
-        w = Word.where(type: type).choose
-      end
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_pc

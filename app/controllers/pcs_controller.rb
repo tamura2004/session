@@ -14,7 +14,7 @@ class PcsController < ApplicationController
   # GET /pcs/new
   def new
     @pc = Pc.create
-    redirect_to edit_pc_race_path(@pc)
+    redirect_to edit_pc_ability_path(@pc)
   end
 
   # GET /pcs/1/edit

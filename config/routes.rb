@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :pc do
-  get 'abilities/edit'
-  end
-
-  namespace :pc do
-  get 'abilities/update'
-  end
-
   root "menu/title#top"
 
   MENUS = {
@@ -33,8 +25,8 @@ Rails.application.routes.draw do
   resource :login, only:  [:new, :create, :destroy]
 
   resources :pcs do
-    %w(name ability race klass).each do |attr|
-      resource attr.to_sym, only: [:edit, :update], controller: "pc/#{attr.pluralize}"
+    %w(name ability race klass party alignment).each do |attr|
+      resource attr.to_sym, only: [:edit, :update, :destroy], controller: "pc/#{attr.pluralize}"
     end
     # resource :ability, only: [:edit, :update], controller: "pc/ability"
     # resource :name, only: [:edit, :update],

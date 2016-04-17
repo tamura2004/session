@@ -1,4 +1,4 @@
-class MazeController < ApplicationController
+class MazeController < Menu::MainController
   def top
   end
 
