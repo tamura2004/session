@@ -1,2 +1,0 @@
-class EnchantArmor < Card
-end

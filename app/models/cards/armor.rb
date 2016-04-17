@@ -1,2 +1,0 @@
-class Armor < Card
-end

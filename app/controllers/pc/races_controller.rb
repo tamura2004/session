@@ -1,30 +1,23 @@
-class RacesController < ApplicationController
+class Pc::RacesController < ApplicationController
   before_action :set_pc, only: [:edit, :update]
 
   # GET /pcs/:pc_id/name/edit
   def edit
-    @race_form = RaceForm.new
+    @races = %w(ヒューマン エルフ ドワーフ ハーフリング)
   end
 
   # PATCH/PUT /pcs/:pc_id/name
   def update
-    enchant_race_id, race_id = pc_params[:race].split("|")
-    @pc.enchant_race_id = enchant_race_id
-    @pc.race_id = race_id
+    @pc.race = params[:race]
 
     if @pc.save
-      redirect_to new_pc_klass_path(@pc)
+      redirect_to edit_pc_klass_path(@pc)
     else
       render :edit
     end
   end
 
   private
-    def races
-      %w(EnchantRace Race).map do |type|
-        Card.where(type: type).choose
-      end
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_pc

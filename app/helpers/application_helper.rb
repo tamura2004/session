@@ -22,6 +22,10 @@ module ApplicationHelper
     link_to name, path, class: "list-group-item", method: :post
   end
 
+  def select_item(name, path)
+    link_to name, path, class: "list-group-item", method: :patch
+  end
+
 end
 
 # .panel.panel-primary

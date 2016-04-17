@@ -3,38 +3,43 @@ class CreateCharacters < ActiveRecord::Migration
     create_table :characters do |t|
       t.string :type
 
-      t.references :player
+      # 第一区画
+      t.string :name                  # 名称
+      t.string :size                  # サイズ区分
+      t.string :race                  # 種族
+      t.string :klass                 #　クラス
+      t.string :alignment             # 属性
+      t.integer :exp                  # 経験値
+      t.integer :level                # レベル
+      t.integer :gp                   # 所持金
 
-      t.string :gender
+      # 第二区画
+      t.integer :ac                   # アーマークラス
+      t.string :ac_type               # アーマークラス種別
+      t.integer :hp                   # ヒットポイント
+      t.string :hp_formula            # ヒットポイント計算式
+      t.string :speed                 # 移動速度
 
-      t.string :name_order # :east, :west
-      t.references :handle_before, index: true, foreign_key: true
-      t.references :handle_after, index: true, foreign_key: true
-      t.references :family_name, index: true, foreign_key: true
-      t.references :given_name, index: true, foreign_key: true
+      # 第三区画（能力値）
+      t.integer :str                  # 筋力
+      t.integer :dex                  # 敏捷
+      t.integer :con                  # 耐久
+      t.integer :int                  # 知力
+      t.integer :wis                  # 判断
+      t.integer :cha                  # 魅力
 
-      t.references :enchant_race, index: true, foreign_key: true
-      t.references :race, index: true, foreign_key: true
+      # 第四区画
+      t.string :skill                 # 一般技能
+      t.string :sense                 # 感覚
+      t.string :damage_vulnerability  # ダメージ脆弱性
+      t.string :damage_resistance     # ダメージ抵抗
+      t.string :damage_immunity       # ダメージ完全耐性
+      t.string :language              # 言語
+      t.integer :challenge            # 脅威度
 
-      t.references :enchant_klass, index: true, foreign_key: true
-      t.references :klass, index: true, foreign_key: true
-
-      t.integer :damage # 受けているダメージ
-
-      t.integer :body
-      t.integer :mind
-      t.integer :speed
-      t.integer :tech
-      t.integer :rule
-      t.integer :fate
-
-      t.integer :hp # ヒットポイント
-      t.integer :wp # 可搬重量
-      t.integer :mp # 魔力量
-      t.integer :sp # 技量ポイント
-      t.integer :tp # テクノロジポイント
-      t.integer :gp # ゴールド
-      t.integer :pp # プラーナ
+      # 第六区画
+      t.string :condition             # 状態異常
+      t.references :party             # 所属パーティ
 
       t.timestamps null: false
     end

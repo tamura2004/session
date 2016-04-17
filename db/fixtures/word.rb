@@ -16,15 +16,9 @@ def to_model(filename)
 end
 
 FILES = [
-  [true,false,false,false,"word_family_name_kana"],
-  [false,true,false,false,"word_family_name_kanji"],
   [true,false,false,true,"word_given_name_kana_female"],
   [true,false,true,false,"word_given_name_kana_male"],
-  [true,false,true,true,"word_given_name_kana_newtral"],
-  [false,true,false,true,"word_given_name_kanji_female"],
-  [false,true,true,false,"word_given_name_kanji_male"],
-  [false,true,false,false,"word_handle_after"],
-  [false,true,false,false,"word_handle_before"]
+  [true,false,true,true,"word_given_name_kana_newtral"]
 ]
 
 FILES.each do |file|

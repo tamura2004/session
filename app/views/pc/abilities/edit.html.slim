@@ -1,0 +1,4 @@
+= panel "能力値を選んで下さい"
+  = list_group
+    - @abilities.each do |ability|
+      = select_item ability.name, pc_ability_path(@pc, ability.attributes)

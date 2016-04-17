@@ -1,0 +1,4 @@
+= panel "種族を選んで下さい"
+  = list_group
+    - @races.each do |race|
+      = select_item race, pc_race_path(@pc, race: race)

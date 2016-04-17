@@ -13,9 +13,8 @@ class PcsController < ApplicationController
 
   # GET /pcs/new
   def new
-    @pc = Pc.create(player_id: current_player.id)
-    session[:pc_id] = @pc.id
-    redirect_to edit_pc_name_path(@pc)
+    @pc = Pc.create
+    redirect_to edit_pc_race_path(@pc)
   end
 
   # GET /pcs/1/edit

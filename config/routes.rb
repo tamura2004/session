@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  namespace :pc do
+  get 'abilities/edit'
+  end
+
+  namespace :pc do
+  get 'abilities/update'
+  end
+
   root "menu/title#top"
 
   MENUS = {
@@ -21,19 +29,17 @@ Rails.application.routes.draw do
     end
   end
 
-  post "game/create"
-  resources :monsters
-  resources :scinarios
-  resources :encounters
-  resources :players
   resource :select, only: [:show, :new, :create, :destroy]
   resource :login, only:  [:new, :create, :destroy]
+
   resources :pcs do
-    resource :name, only: [:edit, :update]
-    resource :race, only: [:edit, :update]
-    resources :klasses, only: [:new, :create]
-    resources :skills, only: [:new, :create]
-    resources :action, only: [:new,:create]
+    %w(name ability race klass).each do |attr|
+      resource attr.to_sym, only: [:edit, :update], controller: "pc/#{attr.pluralize}"
+    end
+    # resource :ability, only: [:edit, :update], controller: "pc/ability"
+    # resource :name, only: [:edit, :update],
+    # resource :race, only: [:edit, :update]
+    # resource :klass, only: [:edit, :update]
   end
 
 end

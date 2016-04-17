@@ -1,0 +1,4 @@
+= panel "クラスを選んで下さい"
+  = list_group
+    - @klasses.each do |klass|
+      = select_item klass, pc_klass_path(@pc, klass: klass)
