@@ -9,7 +9,7 @@ class Pc::KlassesController < ApplicationController
     @pc.klass = params[:klass]
 
     if @pc.save
-      redirect_to edit_pc_ability_path(@pc)
+      redirect_to :training_top
     else
       render :edit
     end

@@ -8,3 +8,7 @@
     = list_item "システム", :main_top
     = list_item "城に戻る", :main_top
 
+  = list_group
+    - Pc.all.each do |pc|
+      = list_item Pc.name
+
