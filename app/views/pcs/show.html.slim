@@ -1,62 +1,6 @@
-.container-fluid
-  table.table.table-bordered.table-condensed
-    tbody
-      tr
-        td キャラクターシート
-
-  table.table.table-bordered.table-condensed
-    tbody
-      tr
-        td.inverse.col-xs-4 PC名
-        td.inverse.col-xs-3 種族
-        td.inverse.col-xs-3 クラス
-        td.inverse.col-xs-2 PL
-      tr
-        td = @pc.full_name
-        td = @pc.race_name
-        td = @pc.klass_name
-        td = @pc.player.name
-
-  table.table.table-bordered.table-condensed
-    tbody
-      tr
-        td.inverse.col-xs-2 肉体
-        td.inverse.col-xs-2 精神
-        td.inverse.col-xs-2 速度
-        td.inverse.col-xs-2 技術
-        td.inverse.col-xs-2 支配
-        td.inverse.col-xs-2 運命
-      tr
-        td = @pc.body
-        td = @pc.mind
-        td = @pc.speed
-        td = @pc.tech
-        td = @pc.rule
-        td = @pc.fate
-
-  table.table.table-bordered.table-condensed
-    tbody
-      tr
-        td.inverse.col-xs-2 スキル名
-        td.inverse タイミング
-        td.inverse 種別
-        td.inverse MP
-        td.inverse 距離
-        td.inverse 対象
-        td.inverse 属性
-        td.inverse 威力
-        td.inverse.col-xs-6 効果
-
-      - @pc.skills.each do |skill|
-        tr
-          td = skill.skill.name
-          td = skill.skill.timing
-          td = skill.skill.kind
-          td = skill.skill.mp
-          td = skill.skill.range
-          td = skill.skill.target
-          td = skill.skill.element
-          td = skill.skill.power
-          td = skill.skill.effect
+= panel "キャラクター"
+  .list-group
+    .list-group-item = @pc.stat
+    = list_item "戻る", :tavern_top
 
 

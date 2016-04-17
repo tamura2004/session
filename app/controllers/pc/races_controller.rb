@@ -12,11 +12,11 @@ class Pc::RacesController < ApplicationController
     case @pc.race
     when "ヒューマン"
       @pc.str += 1
-      @pc.str += 1
-      @pc.str += 1
-      @pc.str += 1
-      @pc.str += 1
-      @pc.str += 1
+      @pc.dex += 1
+      @pc.con += 1
+      @pc.int += 1
+      @pc.wis += 1
+      @pc.cha += 1
     when "ドワーフ"
       @pc.con += 2
     when "エルフ"
@@ -24,9 +24,6 @@ class Pc::RacesController < ApplicationController
     when "ハーフリング"
       @pc.dex += 2
     end
-
-
-
 
     if @pc.save
       redirect_to edit_pc_klass_path(@pc)

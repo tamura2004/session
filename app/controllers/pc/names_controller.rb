@@ -3,9 +3,7 @@ class Pc::NamesController < ApplicationController
 
   # GET /pcs/:pc_id/name/edit
   def edit
-    @names = 6.times.map do
-      GivenName.choose.name
-    end
+    @names = GivenName.sample(6).pluck(:name)
   end
 
   # PATCH/PUT /pcs/:pc_id/name

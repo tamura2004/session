@@ -17,4 +17,9 @@ class Menu::TavernController < Menu::MainController
 
   def exit
   end
+
+  def top
+    @party = current_player.parties.find_or_create_by(area: "town")
+    @pcs = @party.pcs
+  end
 end

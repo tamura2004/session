@@ -17,8 +17,7 @@ end
 
 FILES = [
   [true,false,false,true,"word_given_name_kana_female"],
-  [true,false,true,false,"word_given_name_kana_male"],
-  [true,false,true,true,"word_given_name_kana_newtral"]
+  [true,false,true,false,"word_given_name_kana_male"]
 ]
 
 FILES.each do |file|
