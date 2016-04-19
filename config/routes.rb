@@ -24,14 +24,10 @@ Rails.application.routes.draw do
   resource :select, only: [:show, :new, :create, :destroy]
   resource :login, only:  [:new, :create, :destroy]
 
-  resources :pcs do
-    %w(name ability race klass party alignment).each do |attr|
-      resource attr.to_sym, only: [:edit, :update, :destroy], controller: "pc/#{attr.pluralize}"
-    end
-    # resource :ability, only: [:edit, :update], controller: "pc/ability"
-    # resource :name, only: [:edit, :update],
-    # resource :race, only: [:edit, :update]
-    # resource :klass, only: [:edit, :update]
+  resources :pcs
+
+  %w(name ability race klass).each do |attr|
+    get "pcs/:id/#{attr}/edit", as: "edit_pc_#{attr}", controller: "pcs", action: "edit_#{attr}"
   end
 
 end

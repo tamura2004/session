@@ -1,0 +1,81 @@
+= panel "能力値を選んで下さい"
+  ul.list-group
+    - @pcs.each do |pc|
+      li.list-group-item
+        .row
+          .col-xs-10
+            .row
+              .col-xs-2 = pc.str
+              .col-xs-2 = pc.dex
+              .col-xs-2 = pc.con
+              .col-xs-2 = pc.int
+              .col-xs-2 = pc.wis
+              .col-xs-2 = pc.cha
+          .col-xs-2
+            = simple_form_for(pc) do |f|
+              = f.input :str, as: :hidden
+              = f.input :dex, as: :hidden
+              = f.input :con, as: :hidden
+              = f.input :int, as: :hidden
+              = f.input :wis, as: :hidden
+              = f.input :cha, as: :hidden
+              = button_tag type="submit", class: "btn btn-default btn-xs pull-right"
+                | 選択
+                = fa_icon "check"
+
+/ = panel "能力値を選んで下さい"
+/   .list-group
+/     - @pcs.each do |pc|
+/       .list-group-item
+/         .row
+/           .col-xs-11
+/             .row.small
+/               .col-xs-3 名前
+/               .col-xs-3 種族
+/               .col-xs-2 属性
+/               .col-xs-3　クラス
+
+/             .row.small
+/               .col-xs-3 = pc.name
+/               .col-xs-2 = pc.race
+/               .col-xs-1 = pc.size
+/               .col-xs-2 = pc.alignment
+/               .col-xs-2 = pc.klass
+/               .col-xs-1 = pc.level
+
+/             .row.small
+/               .col-xs-1 筋
+/               .col-xs-1 敏
+/               .col-xs-1 耐
+/               .col-xs-1 知
+/               .col-xs-1 判
+/               .col-xs-1 魅
+/               .col-xs-1 exp
+/               .col-xs-1 gp
+/               .col-xs-1 ac
+/               .col-xs-1 hp
+/               .col-xs-1 mv
+
+/             .row.small
+/               .col-xs-1 = pc.str
+/               .col-xs-1 = pc.dex
+/               .col-xs-1 = pc.con
+/               .col-xs-1 = pc.int
+/               .col-xs-1 = pc.wis
+/               .col-xs-1 = pc.cha
+/               .col-xs-1 = pc.exp
+/               .col-xs-1 = pc.gp
+/               .col-xs-1 = pc.ac
+/               .col-xs-1 = pc.hp
+/               .col-xs-1 = pc.speed
+/           .col-xs-1
+/             .row
+/               = simple_form_for(pc) do |f|
+/                 = f.input :str, as: :hidden
+/                 = f.input :dex, as: :hidden
+/                 = f.input :con, as: :hidden
+/                 = f.input :int, as: :hidden
+/                 = f.input :wis, as: :hidden
+/                 = f.input :cha, as: :hidden
+/                 = button_tag type: "submit", class: "btn btn-default btn-xs pull-right"
+/                   = fa_icon "check"

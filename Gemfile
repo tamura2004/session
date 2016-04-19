@@ -36,3 +36,4 @@ gem 'kaminari'
 gem "seed-fu"
 gem "quiet_assets"
 gem "roo"
+gem "font-awesome-rails"
