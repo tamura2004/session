@@ -1,12 +1,14 @@
-= panel "名前を選んで下さい"
+= panel "キャラクターを選択して下さい"
   .list-group
     - @pcs.each do |pc|
       .list-group-item
         .row
-          .col-xs-11 = pc.name
+          .col-xs-4 = pc.name
+          .col-xs-4 = pc.race
+          .col-xs-3 = pc.klass
           .col-xs-1
             = simple_form_for(pc) do |f|
-              = f.input :name, as: :hidden
+              = f.input :party_id, as: :hidden
               = button_tag type="submit", class: "btn btn-default btn-xs pull-right"
                 | 選択
                 = fa_icon "check"

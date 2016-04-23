@@ -25,7 +25,7 @@
   def edit_ability
     session[:redirect_to] = edit_pc_race_path(@pc)
     @pcs = 6.times.map do
-      Pc.find(params[:id]).tap do |pc|
+      get_pc.tap do |pc|
         pc.str = d46
         pc.dex = d46
         pc.con = d46
@@ -39,7 +39,7 @@
   def edit_race
     session[:redirect_to] = edit_pc_klass_path(@pc)
     @pcs = 6.times.map do |i|
-      @pc.dup.tap do |pc|
+      get_pc.tap do |pc|
         case i
         when 0
           pc.size = "中型"
@@ -101,23 +101,23 @@
   def edit_klass
     session[:redirect_to] = edit_pc_name_path(@pc)
     @pcs = 4.times.map do |i|
-      @pc.dup.tap do |pc|
+      get_pc.tap do |pc|
         case i
         when 0
           pc.klass = "ファイター"
-          pc.hp = 10 + hp_bonus
+          pc.hp = 10 + pc.hp_bonus
           pc.gp = d(5,4) * 10
         when 1
           pc.klass = "ウィザード"
-          pc.hp = 6 + hp_bonus
+          pc.hp = 6 + pc.hp_bonus
           pc.gp = d(4,4) * 10
         when 2
           pc.klass = "クレリック"
-          pc.hp = 8 + hp_bonus
+          pc.hp = 8 + pc.hp_bonus
           pc.gp = d(5,4) * 10
         when 3
           pc.klass = "ローグ"
-          pc.hp = 8 + hp_bonus
+          pc.hp = 8 + pc.hp_bonus
           pc.gp = d(4,4) * 10
         end
       end
@@ -125,10 +125,16 @@
   end
 
   def edit_name
-    @pcs = GivenName.sample(6).pluck(:name).each do |name|
-      @pc.dup.tap do |pc|
+    @pcs = GivenName.sample(6).pluck(:name).map do |name|
+      get_pc.tap do |pc|
         pc.name = name
       end
+    end
+  end
+
+  def edit_party
+    @pcs = Pc.where(party_id: nil).tap do |pc|
+      pc.party_id = current_player.party.id
     end
   end
 
@@ -155,6 +161,10 @@
     # Use callbacks to share common setup or constraints between actions.
     def set_pc
       @pc = Pc.find(params[:id])
+    end
+
+    def get_pc
+      Pc.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

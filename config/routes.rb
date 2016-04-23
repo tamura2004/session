@@ -30,4 +30,6 @@ Rails.application.routes.draw do
     get "pcs/:id/#{attr}/edit", as: "edit_pc_#{attr}", controller: "pcs", action: "edit_#{attr}"
   end
 
+  get "pcs/party/edit", as: "edit_pc_party", controller: "pcs", action: "edit_party"
+
 end
