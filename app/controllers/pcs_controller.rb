@@ -34,6 +34,7 @@
         pc.cha = d46
       end
     end
+    binding.pry
   end
 
   def edit_race

@@ -1,0 +1,8 @@
+rails g model pc
+rails g model name pc:references
+rails g model ability pc:references str:integer dex:integer con:integer int:integer wis:integer cha:integer
+rails g model pc_race pc:references race:references
+rails g model pc_klass pc:references klass:refernces
+rails g model pc_weapon pc:references item:references
+rails g model pc_armor pc:references item:references
+rails g model pc_items pc:references item:references
