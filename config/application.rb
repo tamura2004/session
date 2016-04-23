@@ -32,6 +32,7 @@ module Session
     # modelサブフォルダ
     # config.autoload_paths += Dir[Rails.root.join("app","views","menus")]
     # config.autoload_paths += Dir[Rails.root.join("app","controllers","menus")]
+    config.autoload_paths += Dir[Rails.root.join("app","presenter"]
     config.autoload_paths += Dir[Rails.root.join("app","models","cards")]
     config.autoload_paths += Dir[Rails.root.join("app","models","words")]
 
