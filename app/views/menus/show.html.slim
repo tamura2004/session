@@ -1,0 +1,8 @@
+= panel @menu.name
+  = list_group
+    - @menu.children.each do |menu|
+      = list_item menu.name, menu_path(menu.id)
+
+- if @menu.parent
+  = list_group
+    = list_item @menu.parent.name, menu_path(@menu.parent.id)

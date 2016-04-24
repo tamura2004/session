@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417105748) do
+ActiveRecord::Schema.define(version: 20160424110954) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer  "str"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 20160417105748) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  create_table "menus", force: :cascade do |t|
+    t.string   "name"
+    t.string   "path"
+    t.boolean  "visible"
+    t.integer  "menu_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "menus", ["menu_id"], name: "index_menus_on_menu_id"
 
   create_table "parties", force: :cascade do |t|
     t.integer  "player_id"
