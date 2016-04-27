@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'abilities/create'
+
   root "menus#top"
 
   get 'dungeon/up'
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   get 'menus/top'
 
   resources :menus, only: [:index, :show]
+  resources :abilities, only: [:create]
 
   # MENUS = {
   #   title: %w(top),

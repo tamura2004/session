@@ -1,8 +1,12 @@
 = panel @menu.name
   = list_group
-    - @menu.children.each do |menu|
-      = list_item menu.name, menu_path(menu.id)
+    - unless @menu.choices
+      - @menu.children.each do |child|
+        = list_item child.name, child
 
+    - else
+      - @menu.choices.each do |choice|
+        = list_item choice.name, menu_path(@menu.children.first, choice.attributes.except(:id,:created_at,:updated_at))
 - if @menu.parent
   = list_group
-    = list_item @menu.parent.name, menu_path(@menu.parent.id)
+    = list_item @menu.parent.name, @menu.parent

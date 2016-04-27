@@ -5,10 +5,10 @@ class CreateCharacters < ActiveRecord::Migration
 
       # 第一区画
       t.string :name                  # 名称
-      t.string :size                  # サイズ区分
-      t.string :race                  # 種族
+      # t.string :size                # サイズ区分
+      t.references :race              # 種族
       t.string :klass                 #　クラス
-      t.string :alignment             # 属性
+      t.references :alignment         # 属性
       t.integer :exp                  # 経験値
       t.integer :level                # レベル
       t.integer :gp                   # 所持金
@@ -21,12 +21,12 @@ class CreateCharacters < ActiveRecord::Migration
       t.string :speed                 # 移動速度
 
       # 第三区画（能力値）
-      t.integer :str                  # 筋力
-      t.integer :dex                  # 敏捷
-      t.integer :con                  # 耐久
-      t.integer :int                  # 知力
-      t.integer :wis                  # 判断
-      t.integer :cha                  # 魅力
+      # t.integer :str                  # 筋力
+      # t.integer :dex                  # 敏捷
+      # t.integer :con                  # 耐久
+      # t.integer :int                  # 知力
+      # t.integer :wis                  # 判断
+      # t.integer :cha                  # 魅力
 
       # 第四区画
       t.string :skill                 # 一般技能

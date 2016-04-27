@@ -1,5 +1,18 @@
 = panel "能力値を選んで下さい"
   ul.list-group
-    - @pcs.each do |pc|
-      - p = PcPresenter.new(pc,self)
-      = p.select_for_update
+    - @abilities.each do |ability|
+      .list-group-item
+        .row
+          .col-xs-11 = ability.name
+          .col-xs-1
+            = simple_form_for(ability) do |f|
+              = f.input :pc_id, as: :hidden
+              = f.input :str, as: :hidden
+              = f.input :dex, as: :hidden
+              = f.input :con, as: :hidden
+              = f.input :int, as: :hidden
+              = f.input :wis, as: :hidden
+              = f.input :cha, as: :hidden
+              = button_tag type="submit", class: "btn btn-default btn-xs pull-right"
+                | 選択
+                = fa_icon "check"

@@ -2,14 +2,30 @@
 
 one:
   name: MyString
-  body: 1
-  mind: 1
-  ref: 1
+  size: MyString
+  alignment: MyString
+  speed: MyString
+  str: 1
+  dex: 1
+  con: 1
+  int: 1
+  wis: 1
   cha: 1
+  skill: MyString
+  sense: MyString
+  damage_bulnerability: MyString
 
 two:
   name: MyString
-  body: 1
-  mind: 1
-  ref: 1
+  size: MyString
+  alignment: MyString
+  speed: MyString
+  str: 1
+  dex: 1
+  con: 1
+  int: 1
+  wis: 1
   cha: 1
+  skill: MyString
+  sense: MyString
+  damage_bulnerability: MyString

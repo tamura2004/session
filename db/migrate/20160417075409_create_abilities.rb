@@ -1,12 +1,15 @@
 class CreateAbilities < ActiveRecord::Migration
   def change
     create_table :abilities do |t|
-      t.integer :str
-      t.integer :dex
-      t.integer :con
-      t.integer :int
-      t.integer :wis
-      t.integer :cha
+
+      t.references :pc                # PC
+
+      t.integer :str                  # 筋力
+      t.integer :dex                  # 敏捷
+      t.integer :con                  # 耐久
+      t.integer :int                  # 知力
+      t.integer :wis                  # 判断
+      t.integer :cha                  # 魅力
 
       t.timestamps null: false
     end

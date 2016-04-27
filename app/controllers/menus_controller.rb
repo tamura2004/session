@@ -10,11 +10,12 @@ class MenusController < ApplicationController
     #   flash[:alert] = "enemy attack you!"
     #   redirect_to menu_url(Menu.find_by(name: "battle"))
     # else
-      if @menu.path
-        redirect_to @menu.path.to_sym
-      elsif @menu.name !~ /battle/i
-        session[:menu_id] = @menu.id
-      end
+
+    if @menu.path
+      redirect_to @menu.path.to_sym
+    elsif @menu.name !~ /battle/i
+      session[:menu_id] = @menu.id
+    end
     # end
   end
 

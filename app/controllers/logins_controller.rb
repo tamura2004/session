@@ -6,12 +6,12 @@ class LoginsController < ApplicationController
   def create
     session[:player_id] = params[:player_id]
     session.delete(:pc_id)
-    redirect_to :main_top
+    redirect_to :menus_top
   end
 
   def select
     session[:player_id] = params[:player_id]
-    redirect_to :main_top
+    redirect_to :menus_top
   end
 
   def destroy

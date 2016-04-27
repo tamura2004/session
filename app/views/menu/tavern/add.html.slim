@@ -1,4 +1,0 @@
-= panel "パーティに加えるキャラクターを選択して下さい"
-  = list_group
-    - @pcs.find_each do |pc|
-      = select_item pc.stat, pc_party_path(pc, party_id: @party.id)

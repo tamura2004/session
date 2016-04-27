@@ -24,77 +24,15 @@
 
   def edit_ability
     session[:redirect_to] = edit_pc_race_path(@pc)
-    @pcs = 6.times.map do
-      get_pc.tap do |pc|
-        pc.str = d46
-        pc.dex = d46
-        pc.con = d46
-        pc.int = d46
-        pc.wis = d46
-        pc.cha = d46
-      end
+    @abilities = 6.times.map do
+      Ability.new(pc: @pc)
     end
-    binding.pry
   end
 
   def edit_race
     session[:redirect_to] = edit_pc_klass_path(@pc)
     @pcs = 6.times.map do |i|
       get_pc.tap do |pc|
-        case i
-        when 0
-          pc.size = "中型"
-          pc.race = "エルフ"
-          pc.alignment = %w(混沌にして善 混沌にして中立 真なる中立 中立にして善).sample
-          pc.speed = "30"
-          pc.dex += 2
-          pc.skill = "トランス"
-          pc.sense = "暗視/鋭敏感覚"
-        when 1
-          pc.size = "中型"
-          pc.race = "ハイ・エルフ"
-          pc.alignment = %w(混沌にして善 混沌にして中立 真なる中立 中立にして善).sample
-          pc.speed = "30"
-          pc.int += 1
-          pc.skill = "トランス/エルフ流武器訓練/初級呪文"
-          pc.sense = "暗視/鋭敏感覚"
-        when 2
-          pc.size = "中型"
-          pc.race = "ドワーフ"
-          pc.alignment = %w(秩序して善 秩序にして中立).sample
-          pc.speed = "25"
-          pc.con += 2
-          pc.skill = "石工の勘/道具習熟/ドワーフ流武器訓練"
-          pc.sense = "暗視"
-          pc.damage_vulnerability = "ドワーフの毒耐性"
-        when 3
-          pc.size = "中型"
-          pc.race = "マウンテン・ドワーフ"
-          pc.alignment = %w(秩序して善 秩序にして中立).sample
-          pc.speed = "25"
-          pc.str += 2
-          pc.skill = "石工の勘/道具習熟/ドワーフ流武器訓練/防具訓練"
-          pc.sense = "暗視"
-          pc.damage_vulnerability = "ドワーフの毒耐性"
-        when 4
-          pc.size = "小型"
-          pc.race = "ハーフリング"
-          pc.alignment = "秩序して善"
-          pc.speed = "25"
-          pc.dex += 2
-          pc.skill = "ハーフリングの勇気/ハーフリングの幸運/すり抜け移動"
-        when 5
-          pc.size = "中型"
-          pc.race = "ヒューマン"
-          pc.alignment = %w(秩序して善 秩序にして中立 混沌にして善 混沌にして中立 真なる中立).sample
-          pc.speed = "30"
-          pc.str += 1
-          pc.dex += 1
-          pc.con += 1
-          pc.int += 1
-          pc.wis += 1
-          pc.cha += 1
-        end
       end
     end
   end

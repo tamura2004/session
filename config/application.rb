@@ -23,6 +23,7 @@ module Session
       g.template_engine :slim
       g.helper false
       g.assets false
+      g.test_framework false
     end
 
     # libファイルの自動読み込み

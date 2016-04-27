@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424110954) do
+ActiveRecord::Schema.define(version: 20160426133711) do
 
   create_table "abilities", force: :cascade do |t|
+    t.integer  "pc_id"
     t.integer  "str"
     t.integer  "dex"
     t.integer  "con"
@@ -36,13 +37,18 @@ ActiveRecord::Schema.define(version: 20160424110954) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "alignments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "characters", force: :cascade do |t|
     t.string   "type"
     t.string   "name"
-    t.string   "size"
-    t.string   "race"
+    t.integer  "race_id"
     t.string   "klass"
-    t.string   "alignment"
+    t.integer  "alignment_id"
     t.integer  "exp"
     t.integer  "level"
     t.integer  "gp"
@@ -51,12 +57,6 @@ ActiveRecord::Schema.define(version: 20160424110954) do
     t.integer  "hp"
     t.string   "hp_formula"
     t.string   "speed"
-    t.integer  "str"
-    t.integer  "dex"
-    t.integer  "con"
-    t.integer  "int"
-    t.integer  "wis"
-    t.integer  "cha"
     t.string   "skill"
     t.string   "sense"
     t.string   "damage_vulnerability"
@@ -68,6 +68,13 @@ ActiveRecord::Schema.define(version: 20160424110954) do
     t.integer  "party_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "gp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "menus", force: :cascade do |t|
@@ -95,6 +102,23 @@ ActiveRecord::Schema.define(version: 20160424110954) do
     t.integer  "pc_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "races", force: :cascade do |t|
+    t.string   "name"
+    t.string   "size"
+    t.string   "speed"
+    t.integer  "str"
+    t.integer  "dex"
+    t.integer  "con"
+    t.integer  "int"
+    t.integer  "wis"
+    t.integer  "cha"
+    t.string   "skill"
+    t.string   "sense"
+    t.string   "damage_vulnerability"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "words", force: :cascade do |t|
