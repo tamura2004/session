@@ -4,15 +4,19 @@ root:
   街外れ:
     訓練場:
       新しいキャラクターを作る:
-        能力値を選択:
-          種族を選択:
-            クラスを選択:
-              名前を選択:
-                キャラクター作成:
-      ステータスを見る: :pcs
-      キャラクターを削除する: :pcs
-      キャラクターの名前を変える: :edit_pc_name
-      キャラクターの職業を変える: :edit_pc_job
+        - 能力値を選択
+        - 種族を選択
+        - クラスを選択
+        - 名前を選択
+        - キャラクター作成
+      ステータスを見る:
+        - キャラクターを選択
+        - キャラクターを表示
+      キャラクターを削除する:
+        - キャラクターを選択
+        - キャラクターを削除
+      キャラクターの名前を変える:
+      キャラクターの職業を変える:
       城に戻る:
     リルガミン城:
       ギルガメッシュの酒場:
@@ -45,16 +49,16 @@ root:
         メンバーを並べ替える:
         冒険を中断する:
       迷宮:
-        地下1層:
-          地下2層:
-            地下3層:
-              地下4層:
-                地下5層:
-                  地下6層:
-                    地下7層:
-                      地下8層:
-                        地下9層:
-                          地下10層:
+        - 地下1層
+        - 地下2層
+        - 地下3層
+        - 地下4層
+        - 地下5層
+        - 地下6層
+        - 地下7層
+        - 地下8層
+        - 地下9層
+        - 地下10層
   戦闘:
     武器で攻撃する: :battle_weapon
     魔法を使う: :battle_spell
@@ -68,38 +72,33 @@ class MenuFactory
 
   def initialize
     @id = 0
-    # @menus = []
   end
 
-  def create(hash,parent)
-    hash.each do |entry,children|
-      @id += 1
+  def id
+    @id += 1
+  end
 
-      case children
-      when Hash
-        # @menus << [@id, parent, entry, nil]
-        Menu.seed do |s|
-          s.id = @id
-          s.name = entry
-          s.menu_id = parent
-          s.path = nil
-          s.visible = true
-        end
-        create(children,@id)
-
-      else
-        Menu.seed do |s|
-          s.id = @id
-          s.name = entry
-          s.menu_id = parent
-          s.path = children
-          s.visible = true
-        end
-        # @menus << [@id, parent, entry, v]
+  def build(parent_id, menus)
+    case menus
+    when Hash
+      menus.each do |name,children|
+        menu = Menu.seed(id: id, name: name, menu_id: parent_id).first
+        build(menu.id, children) if children
       end
+
+    when Array
+      menus.each do |name|
+        menu = Menu.seed(id: id, name: name, menu_id: parent_id).first
+        parent_id = menu.id
+      end
+
+    else
+      Menu.seed(id: id, name: menus, menu_id: parent_id)
     end
+
   end
 end
 
+Menu.delete_all
 f = MenuFactory.new
-f.create(menu,nil)
+f.build(nil, menu)

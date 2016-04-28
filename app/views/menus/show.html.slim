@@ -6,7 +6,7 @@
 
     - else
       - @menu.choices.each do |choice|
-        = list_item choice.name, menu_path(@menu.children.first, choice.attributes.except(:id,:created_at,:updated_at))
+        = list_item choice.name, menu_path(@menu.children.first, form: choice.attributes)
 - if @menu.parent
   = list_group
     = list_item @menu.parent.name, @menu.parent

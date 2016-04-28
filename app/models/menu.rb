@@ -7,7 +7,7 @@ class Menu < ActiveRecord::Base
     when "能力値を選択"
       6.times.map{Ability.new}
     when "名前を選択"
-      GivenName.sample(6).pluck(:name)
+      GivenName.sample(6)
     else
       nil
     end
