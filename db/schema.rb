@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426133711) do
+ActiveRecord::Schema.define(version: 20160429005834) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer  "pc_id"
@@ -57,6 +57,12 @@ ActiveRecord::Schema.define(version: 20160426133711) do
     t.integer  "hp"
     t.string   "hp_formula"
     t.string   "speed"
+    t.integer  "str"
+    t.integer  "dex"
+    t.integer  "con"
+    t.integer  "int"
+    t.integer  "wis"
+    t.integer  "cha"
     t.string   "skill"
     t.string   "sense"
     t.string   "damage_vulnerability"
@@ -69,6 +75,17 @@ ActiveRecord::Schema.define(version: 20160426133711) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  create_table "equipment", force: :cascade do |t|
+    t.integer  "pc_id"
+    t.integer  "item_id"
+    t.integer  "uses"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "equipment", ["item_id"], name: "index_equipment_on_item_id"
+  add_index "equipment", ["pc_id"], name: "index_equipment_on_pc_id"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"

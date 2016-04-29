@@ -3,12 +3,11 @@ menu = YAML.load (<<MENU)
 root:
   街外れ:
     訓練場:
-      新しいキャラクターを作る:
-        - 能力値を選択
-        - 種族を選択
-        - クラスを選択
-        - 名前を選択
-        - キャラクター作成
+      新しいキャラクターを作る: 訓練場
+        # - 能力値を選択
+        # - 種族を選択
+        # - クラスを選択
+        # - 名前を選択
       ステータスを見る:
         - キャラクターを選択
         - キャラクターを表示
@@ -17,37 +16,44 @@ root:
         - キャラクターを削除
       キャラクターの名前を変える:
       キャラクターの職業を変える:
-      城に戻る:
+      城に戻る: リルガミン城
     リルガミン城:
       ギルガメッシュの酒場:
-        パーティに加える: :edit_pc_party
-        パーティから外す: :delete_pc_party
-        ステータスを見る: :pcs
+        パーティに加える:
+        パーティから外す:
+        ステータスを見る:
+        酒場を出る: リルガミン城
       冒険者の宿:
         馬小屋: :rest_pc
         簡易寝台: :rest_pc
         エコノミールーム: :rest_pc
         スイートルーム: :rest_pc
         ロイヤルスイート: :rest_pc
+        宿を出る: リルガミン城
       ボルタック商店:
         アイテムを買う:
-          購入アイテム選択:
-            誰が購入しますか？:
-        アイテムを売る: :item_sell
-        呪いを解く: :item_dispel
-        アイテムを識別する: :item_identify
+        アイテムを売る:
+        呪いを解く:
+          呪いのアイテム選択:
+            アイテムを解呪する: ボルタック商店
+        アイテムの鑑定:
+          鑑定アイテム選択:
+            アイテムを鑑定する: ボルタック商店
+        店を出る: リルガミン城
       カント寺院:
         死者を蘇生する: :temple_raise_dead
         灰から復活させる: :temple_reserrection
         麻痺を治す: :temple_cure_paralys
         毒を治す: :temple_neutralize_poison
         呪いを解く: :temple_remove_curse
-    狂王の試練場:
+        寺院を出る: リルガミン城
+    地下迷宮に入る:
       キャンプ:
         ステータスを見る:
         他のパーティを探す:
         メンバーを並べ替える:
         冒険を中断する:
+        外に出る: 迷宮
       迷宮:
         - 地下1層
         - 地下2層
@@ -82,8 +88,14 @@ class MenuFactory
     case menus
     when Hash
       menus.each do |name,children|
-        menu = Menu.seed(id: id, name: name, menu_id: parent_id).first
-        build(menu.id, children) if children
+        case children
+        when Hash, Array
+          menu = Menu.seed(id: id, name: name, menu_id: parent_id).first
+          build(menu.id, children)
+        else
+          Menu.seed(id: id, name: name, menu_id: parent_id, path: children)
+
+        end
       end
 
     when Array

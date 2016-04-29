@@ -2,8 +2,8 @@ class Ability < ActiveRecord::Base
   belongs_to :pc
   after_initialize :set_default_value
 
-  def name
-    "【筋力】%2d　【敏捷】%2d　【耐久】%2d　【知力】%2d　【判断】%2d　【魅力】%2d" % [str,dex,con,int,wis,cha]
+  def label
+    "【筋】%2d　【敏】%2d　【耐】%2d　【知】%2d　【判】%2d　【魅】%2d" % [str,dex,con,int,wis,cha]
   end
 
   private

@@ -15,19 +15,19 @@ module ApplicationHelper
   end
 
   def list_item(name, path)
-    link_to name, path, class: "list-group-item"
+    link_to raw(name), path, class: "list-group-item"
   end
 
   def button_item(name, path)
-    link_to name, path, class: "list-group-item", method: :post
+    link_to raw(name), path, class: "list-group-item", method: :post
   end
 
   def select_item(name, path)
-    link_to name, path, class: "list-group-item", method: :patch
+    link_to raw(name), path, class: "list-group-item", method: :patch
   end
 
   def delete_item(name, path)
-    link_to name, path, class: "list-group-item", method: :delete
+    link_to raw(name), path, class: "list-group-item", method: :delete
   end
 
 

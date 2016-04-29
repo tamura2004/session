@@ -20,13 +20,13 @@ class CreateCharacters < ActiveRecord::Migration
       t.string :hp_formula            # ヒットポイント計算式
       t.string :speed                 # 移動速度
 
-      # 第三区画（能力値）
-      # t.integer :str                  # 筋力
-      # t.integer :dex                  # 敏捷
-      # t.integer :con                  # 耐久
-      # t.integer :int                  # 知力
-      # t.integer :wis                  # 判断
-      # t.integer :cha                  # 魅力
+      # 能力値
+      t.integer :str                  # 筋力
+      t.integer :dex                  # 敏捷
+      t.integer :con                  # 耐久
+      t.integer :int                  # 知力
+      t.integer :wis                  # 判断
+      t.integer :cha                  # 魅力
 
       # 第四区画
       t.string :skill                 # 一般技能

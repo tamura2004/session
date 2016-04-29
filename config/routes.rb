@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'battle/escape'
   get 'menus/top'
 
-  resources :menus, only: [:index, :show]
+  resources :menus
   resources :abilities, only: [:create]
 
   # MENUS = {
