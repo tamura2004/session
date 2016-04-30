@@ -128,12 +128,15 @@ ActiveRecord::Schema.define(version: 20160430113618) do
   add_index "monsters", ["menu_id"], name: "index_monsters_on_menu_id"
 
   create_table "parties", force: :cascade do |t|
+    t.string   "name"
     t.integer  "player_id"
+    t.integer  "menu_id"
     t.string   "area"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "parties", ["menu_id"], name: "index_parties_on_menu_id"
   add_index "parties", ["player_id"], name: "index_parties_on_player_id"
 
   create_table "players", force: :cascade do |t|

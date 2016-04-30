@@ -1,13 +1,13 @@
+= panel "log"
+  = list_group
+    - Log.where("created_at > ?", Time.zone.now.ago(10)).each do |log|
+      = list_item log.message, nil
+
 -if @menu.monsters.present?
   = panel "モンスターがあらわれた"
     = list_group
       - @menu.monsters.each do |monster|
         = list_item monster.label, menu_path(@menu, attack: monster.id)
-
-  = panel "log"
-    = list_group
-      - Log.where("created_at > ?", Time.zone.now.ago(10)).each do |log|
-        = list_item log.message, nil
 
 - else
 
@@ -28,9 +28,9 @@
         - @menu.children.each do |child|
           = list_item child.name, child
 
-= panel "キャラクター一覧"
+= panel "パーティ \"#{current_player.party.name}\""
   = list_group
-    - Pc.all.each do |pc|
+    - current_player.party.pcs.each do |pc|
       = list_item pc.label, pc
       - pc.equipments.group(:item_id).count.each do |item_id,count|
         = list_item "#{Item.find(item_id).name} x #{count}", nil

@@ -16,6 +16,9 @@ def to_model(filename)
 end
 
 FILES = [
+  [false,false,false,false,"word_handle_after"],
+  [false,false,false,false,"word_handle_before"],
+  [true,false,false,true,"word_given_name_kana_female"],
   [true,false,false,true,"word_given_name_kana_female"],
   [true,false,true,false,"word_given_name_kana_male"]
 ]
