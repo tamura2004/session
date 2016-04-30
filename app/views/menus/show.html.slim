@@ -1,23 +1,36 @@
-= panel @title || @menu.name
-  = list_group
-    - if @choices
-      - @choices.each do |choice|
-        - if @delete
-          = delete_item choice.label, menu_path(@menu, form: choice.attributes.compact)
-        - else
-          = select_item choice.label, menu_path(@menu, form: choice.attributes.compact)
+-if @menu.monsters.present?
+  = panel "モンスターがあらわれた"
+    = list_group
+      - @menu.monsters.each do |monster|
+        = list_item monster.label, menu_path(@menu, attack: monster.id)
 
-    - else
-      - @menu.children.each do |child|
-        = list_item child.name, child
+  = panel "log"
+    = list_group
+      - Log.where("created_at > ?", Time.zone.now.ago(10)).each do |log|
+        = list_item log.message, nil
 
-- if @menu.parent
-  = list_group
-    = list_item @menu.parent.name, @menu.parent
+- else
+
+  - if @menu.parent
+    = list_group
+      = list_item "#{@menu.parent.name}へ戻る", @menu.parent
+
+  = panel @title || @menu.name
+    = list_group
+      - if @choices
+        - @choices.each do |choice|
+          - if @delete
+            = delete_item choice.label, menu_path(@menu, form: choice.attributes.compact)
+          - else
+            = select_item choice.label, menu_path(@menu, form: choice.attributes.compact)
+
+      - else
+        - @menu.children.each do |child|
+          = list_item child.name, child
 
 = panel "キャラクター一覧"
   = list_group
     - Pc.all.each do |pc|
       = list_item pc.label, pc
-      - pc.equipments.each do |equipment|
-        = list_item equipment.label, nil
+      - pc.equipments.group(:item_id).count.each do |item_id,count|
+        = list_item "#{Item.find(item_id).name} x #{count}", nil

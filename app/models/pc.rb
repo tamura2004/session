@@ -9,6 +9,7 @@ class Pc < Character
 
   def label
     "【名前】%-6s 【所持金】%3d <br>【筋】%2d　【敏】%2d　【耐】%2d　【知】%2d　【判】%2d　【魅】%2d" % [name,gp,str,dex,con,int,wis,cha]
+    # "【名前】%-6s 【所持金】%3d" % [name,gp,str,dex,con,int,wis,cha]
   end
 
   private
@@ -19,7 +20,8 @@ class Pc < Character
 
   # ６面ダイスを４個降って、大きい方から３個選んで合計
   def d46
-    [d6,d6,d6,d6].sort.last(3).inject(:+)
+    # [d6,d6,d6,d6].sort.last(3).inject(:+)
+    -Math.log(rand)*5+7
   end
 
   def set_default_value
@@ -30,7 +32,7 @@ class Pc < Character
     self.wis ||= d46
     self.cha ||= d46
 
-    self.gp ||= d6 * 100
+    self.gp ||= ((-Math.log(rand)*30).to_i)*10
 
     self.name ||= GivenName.choose.name
   end

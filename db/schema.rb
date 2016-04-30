@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429005834) do
+ActiveRecord::Schema.define(version: 20160430113618) do
 
   create_table "abilities", force: :cascade do |t|
     t.integer  "pc_id"
@@ -94,6 +94,12 @@ ActiveRecord::Schema.define(version: 20160429005834) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "logs", force: :cascade do |t|
+    t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "menus", force: :cascade do |t|
     t.string   "name"
     t.string   "path"
@@ -104,6 +110,22 @@ ActiveRecord::Schema.define(version: 20160429005834) do
   end
 
   add_index "menus", ["menu_id"], name: "index_menus_on_menu_id"
+
+  create_table "monsters", force: :cascade do |t|
+    t.integer  "menu_id"
+    t.string   "name"
+    t.integer  "hit"
+    t.integer  "escape"
+    t.integer  "damage"
+    t.integer  "defence"
+    t.integer  "hp"
+    t.integer  "gp"
+    t.integer  "exp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "monsters", ["menu_id"], name: "index_monsters_on_menu_id"
 
   create_table "parties", force: :cascade do |t|
     t.integer  "player_id"
