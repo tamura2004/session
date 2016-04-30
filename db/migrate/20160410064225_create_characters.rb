@@ -38,8 +38,8 @@ class CreateCharacters < ActiveRecord::Migration
       t.integer :challenge            # 脅威度
 
       # 第六区画
-      t.string :condition             # 状態異常
-      t.references :party             # 所属パーティ
+      t.string :state                 # 状態
+      t.references :player            # 所属プレイヤー
 
       t.timestamps null: false
     end

@@ -2,10 +2,20 @@ class MenusController < ApplicationController
   before_action :set_menu, only: [:index, :show, :edit, :update, :destroy]
 
   def index
-    render :show
+    if current_player
+      render :show
+    else
+      redirect_to :new_login
+    end
   end
 
   def show
+    if current_player
+      render :show
+    else
+      redirect_to :new_login
+    end
+
     if params[:attack]
       pc = Pc.find(session[:pc_id])
       monster = Monster.find(params[:attack])
@@ -38,6 +48,9 @@ class MenusController < ApplicationController
 
     case @menu.name
 
+    when "パーティに加える"
+      @choices = Pc.where(player_id: nil)
+
     when "新しいキャラクターを作る"
       @choices = 6.times.map{Pc.new}
 
@@ -66,6 +79,9 @@ class MenusController < ApplicationController
   def update
 
     case @menu.name
+
+    when "パーティに加える"
+      Pc.find(params[:form][:id]).update(player: current_player)
 
     when "新しいキャラクターを作る"
       Pc.create(params.require(:form).permit!)
@@ -110,6 +126,12 @@ class MenusController < ApplicationController
     def set_menu
       id = params[:id] || session[:menu_id] || Menu.find_by(name: "リルガミン城")
       @menu = Menu.find(id)
+    end
+
+    def check_player
+      unless current_player
+        redirect_to :new_login
+      end
     end
 
 end

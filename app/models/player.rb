@@ -1,3 +1,3 @@
 class Player < ActiveRecord::Base
-  has_many :parties
+  has_many :pcs
 end
