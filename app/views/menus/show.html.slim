@@ -10,18 +10,13 @@
         = list_item monster.label, menu_path(@menu, attack: monster.id)
 
 - else
-  - p "a"*100
   - if @menu.parent
-    - p "b"*100
     = list_group
       = list_item "#{@menu.parent.name}へ戻る", @menu.parent
 
   = panel @title || @menu.name
     = list_group
-      - p "c"*100
-      - p @choices
       - if @choices.present?
-        - p "d"*100
         - @choices.each do |choice|
           - if @delete
             = delete_item choice.label, menu_path(@menu, form: choice.attributes.compact)

@@ -50,6 +50,9 @@ class MenusController < ApplicationController
     when "パーティに加える"
       @choices = Pc.where(player_id: nil)
 
+    when "パーティから外す"
+      @choices = current_player.pcs
+
     when "新しいキャラクターを作る"
       @choices = 6.times.map{Pc.new}
 
@@ -81,6 +84,10 @@ class MenusController < ApplicationController
 
     when "パーティに加える"
       Pc.find(params[:form][:id]).update(player: current_player)
+      redirect_to @menu
+
+    when "パーティから外す"
+      Pc.find(params[:form][:id]).update(player_id: nil)
       redirect_to @menu
 
     when "新しいキャラクターを作る"
