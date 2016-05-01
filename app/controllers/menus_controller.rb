@@ -10,10 +10,9 @@ class MenusController < ApplicationController
   end
 
   def show
-    if current_player
-      render :show
-    else
+    unless current_player
       redirect_to :new_login
+      return
     end
 
     if params[:attack]
@@ -82,10 +81,11 @@ class MenusController < ApplicationController
 
     when "パーティに加える"
       Pc.find(params[:form][:id]).update(player: current_player)
+      redirect_to @menu
 
     when "新しいキャラクターを作る"
       Pc.create(params.require(:form).permit!)
-      redirect_to Menu.find_by(name: @menu.path)
+      redirect_to @menu
 
     when "アイテムを買う"
       pc = Pc.find(session[:pc_id])

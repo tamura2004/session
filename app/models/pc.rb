@@ -1,5 +1,5 @@
 class Pc < Character
-  belongs_to :party
+  belongs_to :player
   has_many :equipments
   after_initialize :set_default_value
   after_update :check_state
