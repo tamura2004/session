@@ -1,4 +1,4 @@
 = panel "プレイヤーを選んで下さい"
   = list_group
     - @players.each do |player|
-      = button_item player.name, login_path(player_id: player.id)
+      = button_item player.name, login_path(form: player.attributes)

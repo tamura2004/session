@@ -57,7 +57,7 @@
     end
 
     def check_player
-      unless current_player
+      unless player
         redirect_to :new_login
       end
     end

@@ -5,18 +5,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_player
+  def player
     if session[:player_id]
-      @current_player ||= Player.find(session[:player_id])
+      @player ||= Player.find(session[:player_id])
     end
   end
 
-  def current_pc
-    if session[:pc_id]
-      @current_pc ||= Pc.find(session[:pc_id])
-    end
-  end
-
-  helper_method :current_player
-  helper_method :current_pc
+  helper_method :player
 end

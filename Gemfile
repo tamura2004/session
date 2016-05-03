@@ -14,6 +14,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
   gem "pry-rails"
+  gem "better_errors"
 end
 
 group :development do
@@ -37,3 +38,4 @@ gem "seed-fu"
 gem "quiet_assets"
 gem "roo"
 gem "font-awesome-rails"
+gem "aasm"

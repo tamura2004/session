@@ -10,6 +10,23 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
+
+    # 未読ログ画面へ
+    logs = Log.unread(@player.log)
+    if logs.present?
+      @player.update(log: logs.last.created_at)
+      redirect_to :logs and return
+    end
+
+    # 戦闘画面へ
+    if player.menu.monsters.present? && !player.battle
+      player.update(battle: Battle.create)
+      redirect_to player.battle and return
+    end
+
+
+    # メニュー画面へ
+    redirect_to @player.menu
   end
 
   # GET /players/new

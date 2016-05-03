@@ -2,7 +2,7 @@ class SelectsController < ApplicationController
   before_action :check_player, :check_pc
 
   def new
-    @select_form = SelectForm.new(current_player)
+    @select_form = SelectForm.new(player)
   end
 
   def show
@@ -22,13 +22,13 @@ class SelectsController < ApplicationController
 
   private
     def check_player
-      unless current_player
+      unless player
         redirect_to :new_login
       end
     end
 
     def check_pc
-      if current_player.pcs.empty?
+      if player.pcs.empty?
         redirect_to :new_pc
       end
     end

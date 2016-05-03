@@ -1,11 +1,18 @@
+= panel "log"
+  = list_group
+    - Log.where("created_at > ?", Time.zone.now.ago(1)).each do |log|
+      = list_item log.message, nil
+
 -if @menu.monsters.present?
-  = title "モンスター"
-    = render @menu.monsters
+  = panel "モンスターがあらわれた"
+    = list_group
+      - @menu.monsters.each do |monster|
+        = list_item monster.label, menu_path(@menu, attack: monster.id)
 
 - else
-  - if @menu.parent && @menu.parent.name != "root"
+  - if @menu.parent
     = list_group
-      = list_item "#{@menu.parent.name}", @menu.parent
+      = list_item "#{@menu.parent.name}の入り口へ戻る", @menu.parent
 
   = panel @title || @menu.name
     = list_group

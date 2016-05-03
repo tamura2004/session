@@ -1,0 +1,8 @@
+// title, path, contents
+
+= panel title
+  = list_group
+    = render contents
+
+    / - contents.each do |content|
+    /   = list_item content.label, [path, form: content.attributes.compact]

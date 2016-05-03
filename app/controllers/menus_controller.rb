@@ -1,23 +1,20 @@
-class MenusController < ApplicationController
+class MenusController < RequirePlayerController
   before_action :set_menu, only: [:index, :show, :edit, :update, :destroy]
 
-  def index
-    if current_player
-      render :show
-    else
-      redirect_to :new_login
-    end
+  def top
+    session.delete(:player_id)
   end
 
   def show
-    unless current_player
-      redirect_to :new_login
-      return
+
+    # 未読ログ画面へ
+    if Log.unread(player.log).present?
+      redirect_to :logs and return
     end
 
-    if params[:attack]
+    if params[:monster]
       pc = Pc.find(session[:pc_id])
-      monster = Monster.find(params[:attack])
+      monster = Monster.find(params[:monster][:id])
       damage = rand(10)
       if rand < 0.3
         Log.create(message: "#{monster.name}はひらりと身をかわした")
@@ -31,18 +28,13 @@ class MenusController < ApplicationController
         end
       end
 
-      if rand < 0.3
-        damage = rand(10)
+      if rand < 0.9
+        damage = rand(100)
         Log.create(message: "#{monster.name}の攻撃  #{pc.name}に#{damage}ダメージ")
-        if pc.con <= damage
-          Log.create(message: "#{pc.name}は死んだ")
-          redirect_to Menu.find_by(name: "リルガミン城")
-          return
-        else
-          pc.con -= damage
-          pc.save
-        end
+        pc.damaged(damage)
       end
+
+      redirect_to :logs and return
     end
 
     case @menu.name
@@ -51,13 +43,13 @@ class MenusController < ApplicationController
       @choices = Pc.where(player_id: nil)
 
     when "パーティから外す"
-      @choices = current_player.pcs
+      @choices = player.pcs
 
     when "新しいキャラクターを作る"
       @choices = 6.times.map{Pc.new}
 
-    when /ボルタック商店/
-      @choices = Pc.all
+    when "ボルタック商店"
+      @choices = player.pcs
       @title = "誰が入店しますか"
 
     when /アイテムを買う/
@@ -83,7 +75,7 @@ class MenusController < ApplicationController
     case @menu.name
 
     when "パーティに加える"
-      Pc.find(params[:form][:id]).update(player: current_player)
+      Pc.find(params[:form][:id]).update(player: player)
       redirect_to @menu
 
     when "パーティから外す"
@@ -102,7 +94,7 @@ class MenusController < ApplicationController
         Equipment.create(pc: pc, item: item)
         pc.gp -= item.gp
         pc.save
-        flash[:notice] = "#{item.name}をお買い上げで#{item.gp}gpになります"
+        flash[:notice] = "#{item.name}をお買い上げで#{item.gp}gpになります。残りの所持金は#{pc.gp}gpですね。"
       else
         flash[:alert] = "この貧乏人が！（お金が足りませんよ）"
       end
@@ -110,6 +102,7 @@ class MenusController < ApplicationController
 
     when "ボルタック商店"
       id = params[:form][:id]
+      player.update(pc_id: id)
       session[:pc_id] = id
       pc = Pc.find(id)
       @title = "いらっしゃいませ。#{pc.name}さん。"
@@ -133,12 +126,7 @@ class MenusController < ApplicationController
     def set_menu
       id = params[:id] || session[:menu_id] || Menu.find_by(name: "リルガミン城")
       @menu = Menu.find(id)
-    end
-
-    def check_player
-      unless current_player
-        redirect_to :new_login
-      end
+      player.update(menu: @menu)
     end
 
 end
