@@ -5,7 +5,7 @@ class Pc < Character
   after_initialize :set_default_value
   after_update :check_state
 
-  scope :active, -> { where.not(state: "dead") }
+  scope :active, -> { where.not(state: "死亡") }
   scope :solo, -> { where(player: nil) }
 
   def label

@@ -12,29 +12,13 @@ class MenusController < RequirePlayerController
       redirect_to :logs and return
     end
 
-    if params[:monster]
-      pc = Pc.find(session[:pc_id])
-      monster = Monster.find(params[:monster][:id])
-      damage = rand(10)
-      if rand < 0.3
-        Log.create(message: "#{monster.name}はひらりと身をかわした")
-      else
-        Log.create(message: "#{pc.name}の攻撃  #{monster.name}に#{damage}ダメージ")
-        if monster.hp <= damage
-          Log.create(message: "#{monster.name}を倒した。#{monster.exp}経験値を得た。#{monster.gp}ゴールドを得た。")
-          pc.gp += monster.gp
-          # pc.exp += monster.exp
-          monster.delete
-        end
-      end
+    if player.battle
+      redirect_to battle and return
+    end
 
-      if rand < 0.9
-        damage = rand(100)
-        Log.create(message: "#{monster.name}の攻撃  #{pc.name}に#{damage}ダメージ")
-        pc.damaged(damage)
-      end
-
-      redirect_to :logs and return
+    unless player.menu.monsters.empty?
+      player.battle.create
+      redirect_to battle and return
     end
 
     case @menu.name

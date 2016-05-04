@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
   has_many :pcs
+  belongs_to :pc
   belongs_to :menu
   belongs_to :battle
 

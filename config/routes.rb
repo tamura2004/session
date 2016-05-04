@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   resources :pcs
   resources :players
   resources :logs, only: [:index]
+  resources :battles
 
 end
