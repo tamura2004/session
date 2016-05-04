@@ -5,4 +5,6 @@ class Log < ActiveRecord::Base
     message
   end
 
+  scope :info, ->(str){ create(message: str) }
+
 end

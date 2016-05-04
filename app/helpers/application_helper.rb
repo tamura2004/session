@@ -24,7 +24,10 @@ module ApplicationHelper
   end
 
   def list_group_item(content, path, method=:get)
-    link_to raw(content.label), [path, content.form_params], class: "list-group-item", method: method
+    key = content.model_name.param_key
+    value = content.attributes.compact.except("created_at","updated_at")
+
+    link_to raw(content.label), [path, Hash[key,value]], class: "list-group-item", method: method
   end
 
   def list_item(name, path)

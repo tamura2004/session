@@ -3,7 +3,7 @@ class Pc < Character
   belongs_to :alignment
   has_many :equipments
   after_initialize :set_default_value
-  after_update :check_state
+  after_save :check_state
 
   scope :active, -> { where.not(state: "死亡") }
   scope :solo, -> { where(player: nil) }
@@ -13,9 +13,19 @@ class Pc < Character
     # "【名前】%-6s 【所持金】%3d" % [name,gp,str,dex,con,int,wis,cha]
   end
 
+  def attack(equipment, monster)
+    Log.info("#{name}が#{equipment.name}で#{monster.name}を攻撃")
+
+    if true
+      monster.damaged(rand(str))
+    else
+      Log.info("#{monster.name}はひらりと身をかわした")
+    end
+  end
+
   def damaged(damage)
-    self.hp -= damage
-    save
+    Log.info("#{name}に#{damage}ダメージ")
+    update(hp: hp - damage)
   end
 
   private

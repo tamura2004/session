@@ -25,11 +25,6 @@ root:
           アイテムを鑑定する: ボルタック商店
       店を出る: リルガミン城
     カント寺院:
-      死者を蘇生する: :temple_raise_dead
-      灰から復活させる: :temple_reserrection
-      麻痺を治す: :temple_cure_paralys
-      毒を治す: :temple_neutralize_poison
-      呪いを解く: :temple_remove_curse
       寺院を出る: リルガミン城
     街外れ:
       訓練場:

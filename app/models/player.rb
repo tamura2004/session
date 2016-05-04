@@ -6,6 +6,12 @@ class Player < ActiveRecord::Base
 
   after_initialize :set_default_value
 
+  def reset!
+    if battle
+      battle.delete
+    end
+  end
+
   def set_default_value
     self.menu ||= Menu.by_name("リルガミン城")
     self.log ||= Time.zone.now

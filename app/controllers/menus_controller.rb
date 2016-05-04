@@ -9,16 +9,19 @@ class MenusController < RequirePlayerController
 
     # 未読ログ画面へ
     if Log.unread(player.log).present?
-      redirect_to :logs and return
+      redirect_to :logs
+      return
     end
 
+    # 戦闘継続
     if player.battle
-      redirect_to battle and return
+      redirect_to player.battle and return
     end
 
-    unless player.menu.monsters.empty?
-      player.battle.create
-      redirect_to battle and return
+    # 戦闘開始
+    if player.menu.monsters.present?
+      player.update(battle: Battle.create)
+      redirect_to player.battle and return
     end
 
     case @menu.name
@@ -43,6 +46,12 @@ class MenusController < RequirePlayerController
       pc = Pc.find(session[:pc_id])
       @delete = true
       @choices = pc.equipments
+
+    when "カント寺院"
+      player.pcs.each do |pc|
+        pc.update(state: "正常")
+      end
+
 
     else
       if @menu.path
@@ -86,7 +95,6 @@ class MenusController < RequirePlayerController
 
     when "ボルタック商店"
       id = params[:form][:id]
-      player.update(pc_id: id)
       session[:pc_id] = id
       pc = Pc.find(id)
       @title = "いらっしゃいませ。#{pc.name}さん。"
