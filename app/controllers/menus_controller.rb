@@ -21,7 +21,8 @@ class MenusController < RequirePlayerController
     # 戦闘開始
     if player.menu.monsters.present?
       player.update(battle: Battle.create)
-      redirect_to player.battle and return
+      Log.info("#{player.menu.monsters.first.name}があらわれた")
+      redirect_to :logs
     end
 
     case @menu.name
@@ -52,6 +53,10 @@ class MenusController < RequirePlayerController
         pc.update(state: "正常")
       end
 
+    when "冒険者の宿"
+      player.pcs.each do |pc|
+        pc.update(hp: pc.con * 3)
+      end
 
     else
       if @menu.path

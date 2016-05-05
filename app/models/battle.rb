@@ -10,8 +10,17 @@ class Battle < ActiveRecord::Base
       Log.info("戦闘に勝利した")
       delete
     else
-      monster.attack(pc)
-      update(pc: nil, equipment: nil, monster: nil)
+      player.menu.monsters.each do |monster|
+        pc = player.pcs.choose
+        monster.attack(pc)
+      end
+      if player.pcs.where(state: "正常").empty?
+        Log.info("全滅した")
+        player.update(menu: Menu.find_by(name: "リルガミン城"))
+        delete
+      else
+        update(pc: nil, equipment: nil, monster: nil)
+      end
     end
   end
 

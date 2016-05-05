@@ -1,4 +1,6 @@
 class Pc < Character
+  include SampleScopes
+
   belongs_to :player
   belongs_to :alignment
   has_many :equipments
