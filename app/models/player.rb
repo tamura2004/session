@@ -10,6 +10,7 @@ class Player < ActiveRecord::Base
     if battle
       battle.delete
     end
+    update(battle_id: nil)
   end
 
   def set_default_value

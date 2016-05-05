@@ -1,5 +1,5 @@
 class Battle < ActiveRecord::Base
-  has_one :player
+  has_one :player, dependent: :nullify
   belongs_to :pc
   belongs_to :equipment
   belongs_to :monster
