@@ -54,10 +54,8 @@ class Pc < ActiveRecord::Base
 
     self.gp ||= ((-Math.log(rand)*30).to_i)*10
     self.level ||= 1
-    self.speed ||= 30
     self.name ||= GivenName.choose.name
-    self.alignment ||= Alignment.choose
-    self.state ||= :ok
+    self.state ||= "正常"
   end
 
   def check_state
