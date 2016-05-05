@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160501150011) do
   add_index "battles", ["monster_id"], name: "index_battles_on_monster_id"
   add_index "battles", ["pc_id"], name: "index_battles_on_pc_id"
 
-  create_table "equipment", force: :cascade do |t|
+  create_table "equipments", force: :cascade do |t|
     t.integer  "pc_id"
     t.integer  "item_id"
     t.integer  "uses"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20160501150011) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "equipment", ["item_id"], name: "index_equipment_on_item_id"
-  add_index "equipment", ["pc_id"], name: "index_equipment_on_pc_id"
+  add_index "equipments", ["item_id"], name: "index_equipments_on_item_id"
+  add_index "equipments", ["pc_id"], name: "index_equipments_on_pc_id"
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -84,36 +84,23 @@ ActiveRecord::Schema.define(version: 20160501150011) do
   add_index "monsters", ["menu_id"], name: "index_monsters_on_menu_id"
 
   create_table "pcs", force: :cascade do |t|
-    t.string   "type"
     t.string   "name"
-    t.integer  "race_id"
-    t.string   "klass"
-    t.integer  "alignment_id"
+    t.string   "job"
     t.integer  "exp"
     t.integer  "level"
     t.integer  "gp"
-    t.integer  "ac"
-    t.string   "ac_type"
     t.integer  "hp"
-    t.string   "hp_formula"
-    t.string   "speed"
+    t.integer  "max_hp"
     t.integer  "str"
     t.integer  "dex"
     t.integer  "con"
     t.integer  "int"
     t.integer  "wis"
     t.integer  "cha"
-    t.string   "skill"
-    t.string   "sense"
-    t.string   "damage_vulnerability"
-    t.string   "damage_resistance"
-    t.string   "damage_immunity"
-    t.string   "language"
-    t.integer  "challenge"
     t.string   "state"
     t.integer  "player_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "players", force: :cascade do |t|
