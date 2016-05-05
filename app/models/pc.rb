@@ -1,4 +1,4 @@
-class Pc < Character
+class Pc < ActiveRecord::Base
   include SampleScopes
 
   belongs_to :player

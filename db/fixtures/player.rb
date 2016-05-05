@@ -6,6 +6,7 @@ NAMES = <<EOD
 高山
 田村
 津下
+木村
 EOD
 
 NAMES.split(/\n/).each_with_index do |name,i|

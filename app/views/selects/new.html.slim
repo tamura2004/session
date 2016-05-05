@@ -1,5 +1,0 @@
-= simple_form_for(@select_form, url: select_path) do |f|
-  .form-input
-    = f.input :pc_id, as: :radio_buttons, collection: @select_form.pcs, label: "プレイヤーを選んで下さい"
-  .form-actions
-    = f.button :submit, value: "決定"

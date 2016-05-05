@@ -4,6 +4,13 @@ class Battle < ActiveRecord::Base
   belongs_to :equipment
   belongs_to :monster
 
+  def status
+    pc_name = pc.try(:name) || "選択中"
+    equipment_name = equipment.try(:name) || "選択中"
+    monster_name = monster.try(:name) || "選択中"
+    "誰が：#{pc_name}　手段：#{equipment_name}　対象：#{monster_name}"
+  end
+
   def attack!
     pc.attack(equipment, monster)
     if player.menu.monsters.empty?
@@ -14,7 +21,7 @@ class Battle < ActiveRecord::Base
         pc = player.pcs.choose
         monster.attack(pc)
       end
-      if player.pcs.where(state: "正常").empty?
+      if player.pcs.where.not(state: "死亡").empty?
         Log.info("全滅した")
         player.update(menu: Menu.find_by(name: "リルガミン城"))
         delete

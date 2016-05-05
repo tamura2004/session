@@ -1,3 +1,6 @@
 = panel @title
+
+  = list_group
+    = list_item @battle.status, @battle
   = list_group
     = render @contents, path: player.battle, method: :patch

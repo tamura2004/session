@@ -13,30 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160501150011) do
 
-  create_table "abilities", force: :cascade do |t|
-    t.integer  "pc_id"
-    t.integer  "str"
-    t.integer  "dex"
-    t.integer  "con"
-    t.integer  "int"
-    t.integer  "wis"
-    t.integer  "cha"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "actions", force: :cascade do |t|
-    t.integer  "character_id"
-    t.string   "name"
-    t.string   "range"
-    t.string   "mean"
-    t.string   "hit"
-    t.string   "damege_formula"
-    t.string   "damage_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "alignments", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -55,39 +31,6 @@ ActiveRecord::Schema.define(version: 20160501150011) do
   add_index "battles", ["equipment_id"], name: "index_battles_on_equipment_id"
   add_index "battles", ["monster_id"], name: "index_battles_on_monster_id"
   add_index "battles", ["pc_id"], name: "index_battles_on_pc_id"
-
-  create_table "characters", force: :cascade do |t|
-    t.string   "type"
-    t.string   "name"
-    t.integer  "race_id"
-    t.string   "klass"
-    t.integer  "alignment_id"
-    t.integer  "exp"
-    t.integer  "level"
-    t.integer  "gp"
-    t.integer  "ac"
-    t.string   "ac_type"
-    t.integer  "hp"
-    t.string   "hp_formula"
-    t.string   "speed"
-    t.integer  "str"
-    t.integer  "dex"
-    t.integer  "con"
-    t.integer  "int"
-    t.integer  "wis"
-    t.integer  "cha"
-    t.string   "skill"
-    t.string   "sense"
-    t.string   "damage_vulnerability"
-    t.string   "damage_resistance"
-    t.string   "damage_immunity"
-    t.string   "language"
-    t.integer  "challenge"
-    t.string   "state"
-    t.integer  "player_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
 
   create_table "equipment", force: :cascade do |t|
     t.integer  "pc_id"
@@ -140,19 +83,19 @@ ActiveRecord::Schema.define(version: 20160501150011) do
 
   add_index "monsters", ["menu_id"], name: "index_monsters_on_menu_id"
 
-  create_table "players", force: :cascade do |t|
+  create_table "pcs", force: :cascade do |t|
+    t.string   "type"
     t.string   "name"
-    t.integer  "menu_id"
-    t.integer  "battle_id"
-    t.datetime "log"
-    t.string   "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "races", force: :cascade do |t|
-    t.string   "name"
-    t.string   "size"
+    t.integer  "race_id"
+    t.string   "klass"
+    t.integer  "alignment_id"
+    t.integer  "exp"
+    t.integer  "level"
+    t.integer  "gp"
+    t.integer  "ac"
+    t.string   "ac_type"
+    t.integer  "hp"
+    t.string   "hp_formula"
     t.string   "speed"
     t.integer  "str"
     t.integer  "dex"
@@ -163,8 +106,24 @@ ActiveRecord::Schema.define(version: 20160501150011) do
     t.string   "skill"
     t.string   "sense"
     t.string   "damage_vulnerability"
+    t.string   "damage_resistance"
+    t.string   "damage_immunity"
+    t.string   "language"
+    t.integer  "challenge"
+    t.string   "state"
+    t.integer  "player_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "menu_id"
+    t.integer  "battle_id"
+    t.datetime "log"
+    t.string   "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "words", force: :cascade do |t|

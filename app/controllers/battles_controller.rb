@@ -5,7 +5,7 @@ class BattlesController < RequirePlayerController
 
     if @battle.pc.nil?
       @title = "攻撃キャラクターを選択"
-      @contents = player.pcs.where(state: "正常")
+      @contents = player.pcs.where.not(state: "死亡")
 
     elsif @battle.equipment.nil?
       @title = "攻撃手段を選択"

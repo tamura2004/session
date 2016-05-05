@@ -1,6 +1,0 @@
-= simple_form_for @encounter, :html => { :class => "form-horizontal" } do |f|
-  = f.input :name
-  = f.association :scinario, as: :radio_buttons
-  = f.button :submit, :class => 'btn-primary'
-  '
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), encounters_path, :class => 'btn btn-default'
